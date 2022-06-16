@@ -5,21 +5,25 @@ public class Graph : MonoBehaviour {
     private LineRenderer m_line_renderer;
     private EdgeCollider2D m_edge_collider;
 
+    private ASTNode m_previous_working_ast;
+    private Evaluator m_evaluator;
+
     [Range(0.001f, 1.0f)]
     public float Resolution;
-    public float k = 1;
+    public string SourceCode;
 
     private float f(float x) {
-        return 1/k * Mathf.Abs(x);
+        return m_evaluator.Evaluate(m_previous_working_ast, x);
     }
 
     void Start() {
-        m_line_renderer = GetComponent<LineRenderer>();
-        m_edge_collider = GetComponent<EdgeCollider2D>();
+        if (!m_line_renderer) m_line_renderer = GetComponent<LineRenderer>();
+        if (!m_edge_collider) m_edge_collider = GetComponent<EdgeCollider2D>();
+
+        m_evaluator = new Evaluator(SourceCode);
+        m_previous_working_ast = m_evaluator.Parse();
 
         RecalculateGraph();
-
-        Debug.Log((new Evaluator("2 + 3 * 3")).Evaluate());
     }
 
     private void RecalculateGraph() {
@@ -44,4 +48,11 @@ public class Graph : MonoBehaviour {
     }
 
     void Update() { }
+
+    public void SetFuction(string code) {
+        SourceCode = code;
+        m_evaluator.Reset(SourceCode);
+        m_previous_working_ast = m_evaluator.Parse();
+        RecalculateGraph();
+    }
 }

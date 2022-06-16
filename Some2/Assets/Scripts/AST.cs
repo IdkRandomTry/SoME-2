@@ -4,6 +4,7 @@ public enum ASTNodeType {
     Number,
     Unary,
     Binary,
+    X,
 }
 
 public abstract class ASTNode {
@@ -22,11 +23,28 @@ public class VariableASTNode : ASTNode {
     }
 }
 
+public class XASTNode : ASTNode {
+    public Token token;
+
+    public XASTNode(Token token) : base(ASTNodeType.X) {
+        this.token = token;
+    }
+    
+    public override string ToString() {
+        return "X AST Node " + token.Lexeme;
+    }
+}
+
+
 public class NumberASTNode : ASTNode {
     public Token number_token;
 
     public NumberASTNode(Token token) : base(ASTNodeType.Number) {
         number_token = token;
+    }
+    
+    public override string ToString() {
+        return "Number AST Node " + number_token.Lexeme;
     }
 }
 
@@ -37,6 +55,10 @@ public class UnaryASTNode : ASTNode {
     public UnaryASTNode(Token op, ASTNode operand) : base(ASTNodeType.Unary) {
         this.op = op;
         this.operand = operand;
+    }
+    
+    public override string ToString() {
+        return "Unary AST Node " + op.Lexeme + "    (" + operand.ToString() + ")";
     }
 }
 
@@ -49,5 +71,9 @@ public class BinaryASTNode : ASTNode {
         this.left = left;
         this.op = op;
         this.right = right;
+    }
+    
+    public override string ToString() {
+        return "Binary AST Node (" + left.ToString() + ")    " + op.Lexeme + "    (" + right.ToString() + ")";
     }
 }
