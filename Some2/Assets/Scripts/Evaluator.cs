@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public enum TokenType {
     Error,
     EOF,
@@ -32,6 +30,10 @@ public class Token {
         Lexeme = lexeme;
         Value = value;
     }
+
+    public override string ToString() {
+        return base.ToString() + " Type: " + Type + " Lexeme: " + Lexeme + " Value: " + Value;
+    }
 }
 
 public class Lexer {
@@ -54,7 +56,8 @@ public class Lexer {
     }
 
     public Token LexToken() {
-        if (current_index == current_source.Length - 1) return new Token(TokenType.EOF, null, null);
+        while (char.IsWhiteSpace(Current())) current_index++;
+        if (current_index == current_source.Length) return new Token(TokenType.EOF, "", null);
         switch (Current()) {
             case '+': current_index++; return new Token(TokenType.Plus, "+", null);
             case '-': current_index++; return new Token(TokenType.Minus, "-", null);
@@ -109,6 +112,14 @@ public class Parser {
         return prev;
     }
 
+    private bool Match(TokenType type) {
+        if (curr.Type == type) {
+            Advance();
+            return true;
+        }
+        return false;
+    }
+
     private Precedence GetPrec(Token token) {
         switch (token.Type) {
             case TokenType.Plus: case TokenType.Minus: return Precedence.Term;
@@ -118,38 +129,58 @@ public class Parser {
         return Precedence.None;
     }
 
-    public ASTNode ParseExpression(Precedence prec) {
-        ASTNode left = Parse();
-        Token op = Advance();
-        Precedence new_prec = GetPrec(op);
-
-        // TODO(voxel): precedence parsing
-
-        return left;
-    }
-
-    public ASTNode Parse() {
+    public ASTNode ParsePrefixExpr() {
         switch (curr.Type) {
-            case TokenType.Ident: {
-                if (next.Type == TokenType.OpenParen) {
-                    // TODO(voxel): soon:tm:
-                } else {
-                    Advance();
-                    return new VariableASTNode(prev);
-                }
-            } break;
-
-            case TokenType.Number: {
-                ParseExpression(Precedence.None);
-            } break;
-
-            case TokenType.Error: case TokenType.EOF:
-            case TokenType.Equal: case TokenType.Star:
-            case TokenType.Slash:
-                Debug.Log("TODO: Implement Better Error Handling!!");
-            break;
+            case TokenType.Number:
+                Advance();
+                return new NumberASTNode(prev);
+            
+            case TokenType.Plus:
+            case TokenType.Minus:
+                Advance();
+                Token op = prev;
+                ASTNode operand = ParsePrefixExpr();
+                return new UnaryASTNode(op, operand);
+            
+            case TokenType.OpenParen:
+                Advance();
+                ASTNode inner = ParseExpression();
+                Match(TokenType.CloseParen);
+                return inner;
         }
         return null;
+    }
+
+    public ASTNode ParseInfixExpr(Token op, Precedence prec, ASTNode lhs) {
+        switch (op.Type) {
+            case TokenType.Plus:
+            case TokenType.Minus:
+            case TokenType.Star:
+            case TokenType.Slash:
+                ASTNode rhs = ParseExpression(prec);
+                return new BinaryASTNode(lhs, op, rhs);
+        }
+        return null;
+    }
+
+    public ASTNode ParseExpression(Precedence prec = Precedence.Full) {
+        ASTNode left = ParsePrefixExpr();
+        // @Error handling check node validity
+        Precedence curr_prec = GetPrec(curr);
+
+        if (curr_prec == Precedence.None) return left;
+        Advance();
+        Token op = prev;
+        while (true) {
+            if (GetPrec(op) == Precedence.None) break;
+            if (GetPrec(op) <= prec) {
+                left = ParseInfixExpr(op, GetPrec(op) + 1, left);
+                // @Error handling check node validity
+                op = prev;
+            } else break;
+        }
+
+        return left;
     }
 }
 
@@ -162,7 +193,33 @@ public class Evaluator {
         parser = new Parser(lexer);
     }
 
+    public float Evaluate(ASTNode ast) {
+        switch (ast.type) {
+            case ASTNodeType.Number: return (float) ((NumberASTNode)ast).number_token.Value;
+            case ASTNodeType.Unary: {
+                UnaryASTNode unary = (UnaryASTNode) ast;
+                float op_value = Evaluate(unary.operand);
+                
+                if (unary.op.Type == TokenType.Plus) return op_value;
+                else if (unary.op.Type == TokenType.Minus) return -op_value;
+            } break;
+
+            case ASTNodeType.Binary: {
+                BinaryASTNode binary = (BinaryASTNode) ast;
+                float left = Evaluate(binary.left);
+                float right = Evaluate(binary.right);
+
+                if (binary.op.Type == TokenType.Plus) return left + right;
+                else if (binary.op.Type == TokenType.Minus) return left - right;
+                else if (binary.op.Type == TokenType.Star) return left * right;
+                else if (binary.op.Type == TokenType.Slash) return left / right;
+            } break;
+        }
+        return 0.0f;
+    }
+
     public float Evaluate() {
-        return 0;
+        ASTNode ast = parser.ParseExpression();
+        return Evaluate(ast);
     }
 }

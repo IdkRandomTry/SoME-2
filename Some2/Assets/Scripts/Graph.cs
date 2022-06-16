@@ -19,7 +19,7 @@ public class Graph : MonoBehaviour {
 
         RecalculateGraph();
 
-        Debug.Log((new Evaluator("10.2")).Evaluate());
+        Debug.Log((new Evaluator("2 + 3 * 3")).Evaluate());
     }
 
     private void RecalculateGraph() {
@@ -31,7 +31,8 @@ public class Graph : MonoBehaviour {
         for (float x = -half_width; x <= half_width; x += Resolution) {
             Vector2 point2d = new Vector2(x, f(x));
             points2D.Add(point2d);
-            // WTF C#... Why can I add Vector2s to a List<Vector3>. This is terrible language design if it does implicit construction
+            // WTF C#... Why can I add Vector2s to a List<Vector3>.
+            // This is terrible language design if it does implicit construction
             points3D.Add(new Vector3(point2d.x, point2d.y, 0.0f));
         }
 
