@@ -14,6 +14,7 @@ public enum TokenType {
     OpenParen,
     CloseParen,
     X,
+    E,
 }
 
 public enum Precedence {
@@ -83,6 +84,12 @@ public class Lexer {
                     return new Token(TokenType.X, "x", null);
                 } else goto default;
             }
+            case 'e': {
+                if (!char.IsLetterOrDigit(Peek())) {
+                    current_index++;
+                    return new Token(TokenType.E, "e", null);
+                } else goto default;
+            }
             default: {        
                 TokenType type = TokenType.Error;
                 int start_index = current_index;
@@ -115,15 +122,18 @@ public class Parser {
     private Token prev;
     private Token curr;
     private Token next;
+    public bool errored;
 
     public Parser(Lexer source_lexer) {
         lexer = source_lexer;
+        errored = false;
         Advance(); // Fill in next
         Advance(); // Fill in curr
     }
 
     public void Reset(Lexer source_lexer) {
         lexer = source_lexer;
+        errored = false;
         Advance(); // Fill in next
         Advance(); // Fill in curr    
     }
@@ -175,7 +185,12 @@ public class Parser {
             case TokenType.X:
                 Advance();
                 return new XASTNode(prev);
+            
+            case TokenType.E:
+                Advance();
+                return new EASTNode(prev);
         }
+        errored = true;
         return null;
     }
 
@@ -189,10 +204,12 @@ public class Parser {
                 ASTNode rhs = ParseExpression(prec);
                 return new BinaryASTNode(lhs, op, rhs);
         }
+        errored = true;
         return null;
     }
 
     public ASTNode ParseExpression(Precedence prec = Precedence.Full) {
+        if (errored) return null;
         ASTNode left = ParsePrefixExpr();
         // @Error handling check node validity
         Precedence curr_prec = GetPrec(curr);
@@ -201,6 +218,7 @@ public class Parser {
         Advance();
         Token op = prev;
         while (true) {
+            if (errored) return null;
             if (GetPrec(op) == Precedence.None) break;
             if (GetPrec(op) <= prec) {
                 left = ParseInfixExpr(op, GetPrec(op) + 1, left);
@@ -216,18 +234,23 @@ public class Parser {
 public class Evaluator {
     private Lexer lexer;
     private Parser parser;
+    public bool errored;
 
     public Evaluator(string s) {
         lexer = new Lexer(s);
+        errored = false;
         parser = new Parser(lexer);
     }
 
     public void Reset(string s) {
         lexer.Reset(s);
+        errored = false;
         parser.Reset(lexer);
     }
 
     public float Evaluate(ASTNode ast, float x_val) {
+        if (ast == null || errored) return 0.0f;
+
         switch (ast.type) {
             case ASTNodeType.Number: return (float) ((NumberASTNode)ast).number_token.Value;
             case ASTNodeType.Unary: {
@@ -253,11 +276,18 @@ public class Evaluator {
             case ASTNodeType.X: {
                 return x_val;
             }
+
+            case ASTNodeType.E: {
+                return 2.718281828459045f;
+            }
         }
         return 0.0f;
     }
 
     public ASTNode Parse() {
-        return parser.ParseExpression();
+        ASTNode node = parser.ParseExpression();
+        errored = parser.errored;
+        parser.errored = false;
+        return node;
     }
 }

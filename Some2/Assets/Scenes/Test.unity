@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Resolution: 0.1
-  SourceCode: 2 * x + 3
+  SourceCode: x
 --- !u!68 &594095277
 EdgeCollider2D:
   m_ObjectHideFlags: 0

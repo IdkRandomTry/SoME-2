@@ -26,18 +26,35 @@ public class Graph : MonoBehaviour {
         RecalculateGraph();
     }
 
+    private bool IsInCameraBounds(Vector2 v) {
+        float half_height = Camera.main.orthographicSize;
+        float half_width = Camera.main.orthographicSize * Camera.main.aspect;
+        return v.x >= -half_width && v.x <= half_width && v.y >= -half_height && v.y <= half_height;
+    }
+
     private void RecalculateGraph() {
         List<Vector2> points2D = new List<Vector2>();
         List<Vector3> points3D = new List<Vector3>();
 
         float half_width = Camera.main.orthographicSize * Camera.main.aspect;
 
-        for (float x = -half_width; x <= half_width; x += Resolution) {
-            Vector2 point2d = new Vector2(x, f(x));
-            points2D.Add(point2d);
-            // WTF C#... Why can I add Vector2s to a List<Vector3>.
-            // This is terrible language design if it does implicit construction
-            points3D.Add(new Vector3(point2d.x, point2d.y, 0.0f));
+        Vector2 last;
+        Vector2 curr = new Vector2(-half_width - Resolution, f(-half_width - Resolution));
+        Vector2 next = new Vector2(-half_width - Resolution, f(-half_width - Resolution));
+        for (float x = -half_width - Resolution; x <= half_width + Resolution; x += Resolution) {
+            last = curr;
+            curr = next;
+            next = new Vector2(x, f(x));
+
+            if (IsInCameraBounds(curr)) {
+                points2D.Add(curr);
+                points3D.Add(curr);
+            } else {
+                if (IsInCameraBounds(last) || IsInCameraBounds(next)) {
+                    points2D.Add(curr);
+                    points3D.Add(curr);
+                }
+            }
         }
 
         Vector3[] v3d = points3D.ToArray();
@@ -52,7 +69,9 @@ public class Graph : MonoBehaviour {
     public void SetFuction(string code) {
         SourceCode = code;
         m_evaluator.Reset(SourceCode);
-        m_previous_working_ast = m_evaluator.Parse();
+        ASTNode node = m_evaluator.Parse();
+        if (m_evaluator.errored) return;
+        m_previous_working_ast = node;
         RecalculateGraph();
     }
 }

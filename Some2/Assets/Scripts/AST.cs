@@ -5,6 +5,7 @@ public enum ASTNodeType {
     Unary,
     Binary,
     X,
+    E,
 }
 
 public abstract class ASTNode {
@@ -35,6 +36,17 @@ public class XASTNode : ASTNode {
     }
 }
 
+public class EASTNode : ASTNode {
+    public Token token;
+
+    public EASTNode(Token token) : base(ASTNodeType.E) {
+        this.token = token;
+    }
+    
+    public override string ToString() {
+        return "E AST Node e";
+    }
+}
 
 public class NumberASTNode : ASTNode {
     public Token number_token;
