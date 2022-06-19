@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,14 +7,21 @@ public class Graph : MonoBehaviour {
     private EdgeCollider2D m_edge_collider;
 
     private ASTNode m_previous_working_ast;
+    private ASTNode m_target_function;
+    private bool m_start_tinterp;
     private Evaluator m_evaluator;
+
+    private float t = 0.0f;
 
     [Range(0.001f, 1.0f)]
     public float Resolution;
     public string SourceCode;
 
     private float f(float x) {
-        return m_evaluator.Evaluate(m_previous_working_ast, x);
+        return Mathf.Lerp(
+            m_evaluator.Evaluate(m_previous_working_ast, x),
+            m_evaluator.Evaluate(m_target_function, x),
+            t);
     }
 
     void Start() {
@@ -27,8 +35,9 @@ public class Graph : MonoBehaviour {
     }
 
     private bool IsInCameraBounds(Vector2 v) {
-        float half_height = Camera.main.orthographicSize;
-        float half_width = Camera.main.orthographicSize * Camera.main.aspect;
+        const float tolerance = 1.0f;
+        float half_height = Camera.main.orthographicSize + tolerance;
+        float half_width = Camera.main.orthographicSize * Camera.main.aspect + tolerance;
         return v.x >= -half_width && v.x <= half_width && v.y >= -half_height && v.y <= half_height;
     }
 
@@ -64,14 +73,37 @@ public class Graph : MonoBehaviour {
         m_edge_collider.SetPoints(points2D);
     }
 
-    void Update() { }
+    void Update() {
+        if (m_target_function != m_previous_working_ast) {
+            if (t >= 1) {
+                StopCoroutine("LerpT");
+                t = 0.0f;
+                m_previous_working_ast = m_target_function;
+            }
+            RecalculateGraph();
+        }
+    }
+
+    public IEnumerator LerpT() {
+        // Configurable resolution here too?
+        float step = 0.004f;
+        for (float x = 0; x <= 1 + step; x += step) {
+            // Configurable Easing function here?
+            // Cubic Ease In-Out from easings.net
+            t = x < 0.5 ? 4 * x*x*x : 1 - ((-2 * x + 2)*(-2 * x + 2)*(-2 * x + 2)) / 2;
+            yield return null;
+        }
+    }
 
     public void SetFuction(string code) {
+        StartCoroutine("LerpT");
+        t = 0.0f;
         SourceCode = code;
         m_evaluator.Reset(SourceCode);
         ASTNode node = m_evaluator.Parse();
-        if (m_evaluator.errored) return;
-        m_previous_working_ast = node;
+        if (m_evaluator.errored)
+            return; //node = new NumberASTNode(new Token(TokenType.Number, "0", 0.0f));
+        m_target_function = node;
         RecalculateGraph();
     }
 }

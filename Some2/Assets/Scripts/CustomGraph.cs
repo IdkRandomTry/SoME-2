@@ -1,20 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CustomGraph : MonoBehaviour
-{
-    public GameObject inputField;
+public class CustomGraph : MonoBehaviour {
+    public TMPro.TMP_InputField InputField;
 
-    void Start()
-    {
-        var x = inputField.GetComponent<InputField>();
-        x.onEndEdit.AddListener(Enter);
+    private Graph m_graph;
+
+    void Start() {
+        // Get Graph component from THIS gameobject
+        m_graph = GetComponent<Graph>();
+
+        InputField.onEndEdit.AddListener(Enter);
     }
 
-    private void Enter(string ping)
-    {
-        Debug.Log(ping);        
+    private void Enter(string ping) {
+        m_graph.SetFuction(ping);
     }
 }
