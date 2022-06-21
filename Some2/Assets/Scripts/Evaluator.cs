@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum TokenType {
@@ -13,16 +15,17 @@ public enum TokenType {
     Carat,
     OpenParen,
     CloseParen,
+    Comma,
     X,
     E,
 }
 
 public enum Precedence {
     None,
-    Call, // TBA
     Power,
     Factor,
     Term,
+    Call,
     Full,
 }
 
@@ -78,6 +81,7 @@ public class Lexer {
             case '(': current_index++; return new Token(TokenType.OpenParen, "(", null);
             case ')': current_index++; return new Token(TokenType.CloseParen, ")", null);
             case '=': current_index++; return new Token(TokenType.Equal, "=", null);
+            case ',': current_index++; return new Token(TokenType.Comma, ",", null);
             case 'x': {
                 if (!char.IsLetterOrDigit(Peek())) {
                     current_index++;
@@ -153,6 +157,15 @@ public class Parser {
         return false;
     }
 
+    private bool Eat(TokenType type) {
+        if (curr.Type == type) {
+            Advance();
+            return true;
+        }
+        errored = true;
+        return false;
+    }
+
     private Precedence GetPrec(Token token) {
         switch (token.Type) {
             case TokenType.Plus: case TokenType.Minus: return Precedence.Term;
@@ -181,6 +194,20 @@ public class Parser {
                 ASTNode inner = ParseExpression();
                 Match(TokenType.CloseParen);
                 return inner;
+
+            case TokenType.Ident:
+                Advance();
+                Token name = prev;
+                Match(TokenType.OpenParen);
+                List<ASTNode> args = new List<ASTNode>();
+                while (!Match(TokenType.CloseParen)) {
+                    args.Add(ParseExpression());
+                    if (!Match(TokenType.Comma)) {
+                        Eat(TokenType.CloseParen);
+                        break;
+                    }
+                }
+                return new CallIntrinsicASTNode(name, args.ToArray());
 
             case TokenType.X:
                 Advance();
@@ -272,6 +299,16 @@ public class Evaluator {
                 else if (binary.op.Type == TokenType.Slash) return left / right;
                 else if (binary.op.Type == TokenType.Carat) return Mathf.Pow(left, right);
             } break;
+
+            case ASTNodeType.IntrinsicCall: {
+                CallIntrinsicASTNode intrinsic_call = (CallIntrinsicASTNode) ast;
+                List<float> args_evaluated = new List<float>();
+                foreach (ASTNode arg_node in intrinsic_call.arguments)
+                    args_evaluated.Add(Evaluate(arg_node, x_val));
+                Func<float[], float> intrinsic = null;
+                FunctionTable.inbuilt_functions.TryGetValue(intrinsic_call.intrinsic_name.Lexeme, out intrinsic);
+                return intrinsic(args_evaluated.ToArray());
+            }
 
             case ASTNodeType.X: {
                 return x_val;

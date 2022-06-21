@@ -36,6 +36,7 @@ public class Graph : MonoBehaviour {
 
     private bool IsInCameraBounds(Vector2 v) {
         const float tolerance = 1.0f;
+        
         float half_height = Camera.main.orthographicSize + tolerance;
         float half_width = Camera.main.orthographicSize * Camera.main.aspect + tolerance;
         return v.x >= -half_width && v.x <= half_width && v.y >= -half_height && v.y <= half_height;

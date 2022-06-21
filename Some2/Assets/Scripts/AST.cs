@@ -1,6 +1,10 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
 public enum ASTNodeType {
     Error,
-    Variable,
+    IntrinsicCall,
     Number,
     Unary,
     Binary,
@@ -16,11 +20,17 @@ public abstract class ASTNode {
     }
 }
 
-public class VariableASTNode : ASTNode {
-    public Token var_token;
+public class CallIntrinsicASTNode : ASTNode {
+    public Token intrinsic_name;
+    public ASTNode[] arguments;
 
-    public VariableASTNode(Token token) : base(ASTNodeType.Variable) {
-        this.var_token = token;
+    public CallIntrinsicASTNode(Token intrinsic_name, ASTNode[] arguments) : base(ASTNodeType.IntrinsicCall) {
+        this.intrinsic_name = intrinsic_name;
+        this.arguments = arguments;
+    }
+
+    public override string ToString() {
+        return "CallIntrinsic AST Node " + intrinsic_name.Lexeme;
     }
 }
 
@@ -87,5 +97,20 @@ public class BinaryASTNode : ASTNode {
     
     public override string ToString() {
         return "Binary AST Node (" + left.ToString() + ")    " + op.Lexeme + "    (" + right.ToString() + ")";
+    }
+}
+
+public static class FunctionTable {
+    public static Dictionary<string, Func<float[], float>> inbuilt_functions;
+
+    static FunctionTable() {
+        inbuilt_functions = new Dictionary<string, Func<float[], float>>();
+        // Lambdas for float[] to float conversion. Because some intrinsics may want more params
+        // Just basically functions that can be declared inline as parameters directly
+        inbuilt_functions.Add("sin", (float[] input) => Mathf.Sin(input[0]));
+        inbuilt_functions.Add("cos", (float[] input) => Mathf.Cos(input[0]));
+        inbuilt_functions.Add("tan", (float[] input) => Mathf.Tan(input[0]));
+        inbuilt_functions.Add("mod", (float[] input) => Mathf.Abs(input[0]));
+        inbuilt_functions.Add("log", (float[] input) => Mathf.Log(input[0]));
     }
 }
