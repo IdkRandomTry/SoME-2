@@ -34,12 +34,19 @@ public class Graph : MonoBehaviour {
         RecalculateGraph();
     }
 
+    private const float tolerance = 1.0f;
+
     private bool IsInCameraBounds(Vector2 v) {
-        const float tolerance = 1.0f;
-        
         float half_height = Camera.main.orthographicSize + tolerance;
         float half_width = Camera.main.orthographicSize * Camera.main.aspect + tolerance;
         return v.x >= -half_width && v.x <= half_width && v.y >= -half_height && v.y <= half_height;
+    }
+
+    private void ClampToCam(ref Vector2 v) {
+        float half_height = Camera.main.orthographicSize + tolerance;
+        float half_width = Camera.main.orthographicSize * Camera.main.aspect + tolerance;
+        v.x = Mathf.Clamp(v.x, -half_width, half_width);
+        v.y = Mathf.Clamp(v.y, -half_height, half_height);
     }
 
     private void RecalculateGraph() {
@@ -56,15 +63,12 @@ public class Graph : MonoBehaviour {
             curr = next;
             next = new Vector2(x, f(x));
 
-            if (IsInCameraBounds(curr)) {
-                points2D.Add(curr);
-                points3D.Add(curr);
-            } else {
-                if (IsInCameraBounds(last) || IsInCameraBounds(next)) {
-                    points2D.Add(curr);
-                    points3D.Add(curr);
-                }
+            if (!(IsInCameraBounds(last) & IsInCameraBounds(next) && IsInCameraBounds(curr))) {
+                ClampToCam(ref curr);
             }
+
+            points2D.Add(curr);
+            points3D.Add(curr);
         }
 
         Vector3[] v3d = points3D.ToArray();
@@ -104,6 +108,7 @@ public class Graph : MonoBehaviour {
         ASTNode node = m_evaluator.Parse();
         if (m_evaluator.errored)
             return; //node = new NumberASTNode(new Token(TokenType.Number, "0", 0.0f));
+        m_evaluator.Dump(node);
         m_target_function = node;
         RecalculateGraph();
     }

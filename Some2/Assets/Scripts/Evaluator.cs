@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public enum TokenType {
@@ -23,9 +24,9 @@ public enum TokenType {
 public enum Precedence {
     None,
     Power,
+    Call,
     Factor,
     Term,
-    Call,
     Full,
 }
 
@@ -273,6 +274,30 @@ public class Evaluator {
         lexer.Reset(s);
         errored = false;
         parser.Reset(lexer);
+    }
+
+    public void Dump(ASTNode ast, StringBuilder builder, int indent = 0) {
+        for (int i = 0; i < indent; i++) builder.Append("\t");
+        builder.Append(ast.ToString()).Append("\n");
+        switch (ast.type) {
+            case ASTNodeType.IntrinsicCall:
+                foreach (ASTNode iter in ((CallIntrinsicASTNode)ast).arguments)
+                    Dump(iter, builder, indent + 1);
+                break;
+            case ASTNodeType.Unary:
+                Dump(((UnaryASTNode)ast).operand, builder, indent + 1);
+                break;
+            case ASTNodeType.Binary:
+                Dump(((BinaryASTNode)ast).left, builder, indent + 1);
+                Dump(((BinaryASTNode)ast).right, builder, indent + 1);
+                break;
+        }
+    }
+
+    public void Dump(ASTNode ast) {
+        StringBuilder builder = new StringBuilder();
+        Dump(ast, builder);
+        Debug.Log(builder.ToString());
     }
 
     public float Evaluate(ASTNode ast, float x_val) {

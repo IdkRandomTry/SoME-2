@@ -42,7 +42,7 @@ public class XASTNode : ASTNode {
     }
     
     public override string ToString() {
-        return "X AST Node " + token.Lexeme;
+        return "X AST Node x";
     }
 }
 
@@ -80,7 +80,7 @@ public class UnaryASTNode : ASTNode {
     }
     
     public override string ToString() {
-        return "Unary AST Node " + op.Lexeme + "    (" + operand.ToString() + ")";
+        return "Unary AST Node " + op.Lexeme;
     }
 }
 
@@ -96,7 +96,7 @@ public class BinaryASTNode : ASTNode {
     }
     
     public override string ToString() {
-        return "Binary AST Node (" + left.ToString() + ")    " + op.Lexeme + "    (" + right.ToString() + ")";
+        return "Binary AST Node " + op.Lexeme;
     }
 }
 
@@ -111,6 +111,10 @@ public static class FunctionTable {
         inbuilt_functions.Add("cos", (float[] input) => Mathf.Cos(input[0]));
         inbuilt_functions.Add("tan", (float[] input) => Mathf.Tan(input[0]));
         inbuilt_functions.Add("mod", (float[] input) => Mathf.Abs(input[0]));
-        inbuilt_functions.Add("log", (float[] input) => Mathf.Log(input[0]));
+        inbuilt_functions.Add("log", (float[] input) => {
+            // Slightly hacky way to get the line to extend downwards
+            if (input[0] <= 0) return -10;
+            return Mathf.Log(input[0]);
+        });
     }
 }
