@@ -128,6 +128,7 @@ public class Parser {
     private Token curr;
     private Token next;
     public bool errored;
+    private List<string> function_context_variables;
 
     public Parser(Lexer source_lexer) {
         lexer = source_lexer;
@@ -141,6 +142,11 @@ public class Parser {
         errored = false;
         Advance(); // Fill in next
         Advance(); // Fill in curr    
+    }
+
+    private void Error(string message) {
+        errored = true;
+        Debug.Log(message);
     }
 
     private Token Advance() {
@@ -163,7 +169,7 @@ public class Parser {
             Advance();
             return true;
         }
-        errored = true;
+        Error("Token expected " + type.ToString() + " but got " + curr.Type.ToString());
         return false;
     }
 
@@ -199,17 +205,50 @@ public class Parser {
             case TokenType.Ident:
                 Advance();
                 Token name = prev;
-                Match(TokenType.OpenParen);
-                List<ASTNode> args = new List<ASTNode>();
-                while (!Match(TokenType.CloseParen)) {
-                    args.Add(ParseExpression());
-                    if (!Match(TokenType.Comma)) {
-                        Eat(TokenType.CloseParen);
-                        break;
-                    }
-                }
-                return new CallIntrinsicASTNode(name, args.ToArray());
 
+                if (Match(TokenType.OpenParen)) {
+                    List<ASTNode> args = new List<ASTNode>();
+                    while (!Match(TokenType.CloseParen)) {
+                        args.Add(ParseExpression());
+                        if (!Match(TokenType.Comma)) {
+                            Eat(TokenType.CloseParen);
+                            break;
+                        }
+                    }
+
+                    if (!FunctionTable.intrinsic_functions.ContainsKey(name.Lexeme)) {
+                        // User defined function
+                        if (Match(TokenType.Equal)) {
+                            Debug.Log("Defined");
+                            ASTNode value = ParseExpression();
+                            List<string> var_names = new List<string>();
+                            foreach (ASTNode node in args) {
+                                if (node.type != ASTNodeType.Ident) {
+                                    Error("One or more arguments in function definition " + name.Lexeme + " is not an identifier");
+                                } else var_names.Add(((IdentASTNode)node).ident.Lexeme);
+                            }
+                            FunctionTable.user_defined_functions.Add(name.Lexeme, new CustomFunction(value, var_names.Count, var_names.ToArray()));
+                            return new NumberASTNode(new Token(TokenType.Number, "0", 0)); // Is this good?
+                        } else {
+                            // Is an actual call here
+                            if (!FunctionTable.user_defined_functions.ContainsKey(name.Lexeme)) {
+                                Error("Unknown function called " + name.Lexeme);
+                            } else if (FunctionTable.user_defined_functions[name.Lexeme].arity != args.Count) {
+                                Error("Wrong amount of arguments passed to the function" + name.Lexeme + ". Expected " +
+                                    FunctionTable.user_defined_functions[name.Lexeme].arity + " got " + args.Count);
+                            }
+                            Debug.Log("Called");
+                            return new CallASTNode(name, args.ToArray());
+                        }
+                    } else if (FunctionTable.intrinsic_functions[name.Lexeme].arity != args.Count) {
+                        Error("Wrong amount of arguments passed to the function" + name.Lexeme + ". Expected " +
+                            FunctionTable.user_defined_functions[name.Lexeme].arity + " got " + args.Count);
+                    }
+                    return new IntrinsicCallASTNode(name, args.ToArray());
+                } else {
+                    return new IdentASTNode(name);
+                }
+            
             case TokenType.X:
                 Advance();
                 return new XASTNode(prev);
@@ -218,7 +257,7 @@ public class Parser {
                 Advance();
                 return new EASTNode(prev);
         }
-        errored = true;
+        Error("Unknown Expression starting with the token " + curr.Lexeme);
         return null;
     }
 
@@ -232,7 +271,7 @@ public class Parser {
                 ASTNode rhs = ParseExpression(prec);
                 return new BinaryASTNode(lhs, op, rhs);
         }
-        errored = true;
+        Error("Unknown Binary Expression for the token " + op);
         return null;
     }
 
@@ -264,6 +303,8 @@ public class Evaluator {
     private Parser parser;
     public bool errored;
 
+    private Dictionary<string, ASTNode> current_function_context = new Dictionary<string, ASTNode>();
+
     public Evaluator(string s) {
         lexer = new Lexer(s);
         errored = false;
@@ -276,12 +317,17 @@ public class Evaluator {
         parser.Reset(lexer);
     }
 
+    private void Error(string message) {
+        errored = true;
+        Debug.Log(message);
+    }
+
     public void Dump(ASTNode ast, StringBuilder builder, int indent = 0) {
         for (int i = 0; i < indent; i++) builder.Append("\t");
         builder.Append(ast.ToString()).Append("\n");
         switch (ast.type) {
             case ASTNodeType.IntrinsicCall:
-                foreach (ASTNode iter in ((CallIntrinsicASTNode)ast).arguments)
+                foreach (ASTNode iter in ((IntrinsicCallASTNode)ast).arguments)
                     Dump(iter, builder, indent + 1);
                 break;
             case ASTNodeType.Unary:
@@ -304,7 +350,14 @@ public class Evaluator {
         if (ast == null || errored) return 0.0f;
 
         switch (ast.type) {
+            case ASTNodeType.Ident: {
+                IdentASTNode ident = (IdentASTNode) ast;
+                if (current_function_context.ContainsKey(ident.ident.Lexeme)) {
+                    return Evaluate(current_function_context[ident.ident.Lexeme], x_val);
+                } else return 0.0f;
+            }
             case ASTNodeType.Number: return (float) ((NumberASTNode)ast).number_token.Value;
+
             case ASTNodeType.Unary: {
                 UnaryASTNode unary = (UnaryASTNode) ast;
                 float op_value = Evaluate(unary.operand, x_val);
@@ -326,13 +379,24 @@ public class Evaluator {
             } break;
 
             case ASTNodeType.IntrinsicCall: {
-                CallIntrinsicASTNode intrinsic_call = (CallIntrinsicASTNode) ast;
+                IntrinsicCallASTNode intrinsic_call = (IntrinsicCallASTNode) ast;
                 List<float> args_evaluated = new List<float>();
                 foreach (ASTNode arg_node in intrinsic_call.arguments)
                     args_evaluated.Add(Evaluate(arg_node, x_val));
-                Func<float[], float> intrinsic = null;
-                FunctionTable.inbuilt_functions.TryGetValue(intrinsic_call.intrinsic_name.Lexeme, out intrinsic);
-                return intrinsic(args_evaluated.ToArray());
+                return FunctionTable.intrinsic_functions[intrinsic_call.func_name.Lexeme].function(args_evaluated.ToArray());
+            }
+
+            case ASTNodeType.Call: {
+                CallASTNode call = (CallASTNode) ast;
+                CustomFunction fn = FunctionTable.user_defined_functions[call.func_name.Lexeme];
+                
+                for (int i = 0; i < fn.arity; i++) {
+                    current_function_context.Add(fn.var_names[i], call.arguments[i]);
+                }
+                
+                float value = Evaluate(fn.function, x_val);
+                current_function_context.Clear();
+                return value;
             }
 
             case ASTNodeType.X: {

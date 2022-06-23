@@ -100,7 +100,7 @@ public class Graph : MonoBehaviour {
         }
     }
 
-    public void SetFuction(string code) {
+    public void SetFuction(string code, bool should_change) {
         StartCoroutine("LerpT");
         t = 0.0f;
         SourceCode = code;
@@ -109,7 +109,9 @@ public class Graph : MonoBehaviour {
         if (m_evaluator.errored)
             return; //node = new NumberASTNode(new Token(TokenType.Number, "0", 0.0f));
         m_evaluator.Dump(node);
-        m_target_function = node;
-        RecalculateGraph();
+        if (should_change) {
+            m_target_function = node;
+            RecalculateGraph();
+        }
     }
 }

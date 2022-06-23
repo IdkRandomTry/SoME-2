@@ -13,6 +13,7 @@ public class FunctionInput : UIBehaviour {
     private TMPro.TMP_Text[] m_texts;
 
     public Graph AssociatedGraph;
+    public bool ShouldChangeTheGraph;
 
     protected override void Start() {
         base.Start();
@@ -40,6 +41,6 @@ public class FunctionInput : UIBehaviour {
         }
 
         if (AssociatedGraph != null)
-            AssociatedGraph.SetFuction(m_newly_set);
+            AssociatedGraph.SetFuction(m_newly_set, ShouldChangeTheGraph);
     }
 }

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public enum ASTNodeType {
     Error,
+    Call,
     IntrinsicCall,
     Number,
     Unary,
     Binary,
+    Ident,
     X,
     E,
 }
@@ -20,17 +22,39 @@ public abstract class ASTNode {
     }
 }
 
-public class CallIntrinsicASTNode : ASTNode {
-    public Token intrinsic_name;
+public class IdentASTNode : ASTNode {
+    public Token ident;
+
+    public IdentASTNode(Token ident) : base(ASTNodeType.Ident) {
+        this.ident = ident;
+    }
+}
+
+public class CallASTNode : ASTNode {
+    public Token func_name;
     public ASTNode[] arguments;
 
-    public CallIntrinsicASTNode(Token intrinsic_name, ASTNode[] arguments) : base(ASTNodeType.IntrinsicCall) {
-        this.intrinsic_name = intrinsic_name;
+    public CallASTNode(Token func_name, ASTNode[] arguments) : base(ASTNodeType.Call) {
+        this.func_name = func_name;
         this.arguments = arguments;
     }
 
     public override string ToString() {
-        return "CallIntrinsic AST Node " + intrinsic_name.Lexeme;
+        return "Call AST Node " + func_name.Lexeme;
+    }
+}
+
+public class IntrinsicCallASTNode : ASTNode {
+    public Token func_name;
+    public ASTNode[] arguments;
+
+    public IntrinsicCallASTNode(Token func_name, ASTNode[] arguments) : base(ASTNodeType.IntrinsicCall) {
+        this.func_name = func_name;
+        this.arguments = arguments;
+    }
+
+    public override string ToString() {
+        return "IntrinsicCall AST Node " + func_name.Lexeme;
     }
 }
 
@@ -100,21 +124,47 @@ public class BinaryASTNode : ASTNode {
     }
 }
 
+public struct Function {
+    public Func<float[], float> function;
+    public int arity;
+
+    public Function(Func<float[], float> function, int arity) {
+        this.function = function;
+        this.arity = arity;
+    }
+}
+
+public struct CustomFunction {
+    public ASTNode function;
+    public int arity;
+    public string[] var_names;
+
+    public CustomFunction(ASTNode function, int arity, string[] var_names) {
+        this.function = function;
+        this.arity = arity;
+        this.var_names = var_names;
+    }
+}
+
 public static class FunctionTable {
-    public static Dictionary<string, Func<float[], float>> inbuilt_functions;
+    public static Dictionary<string, Function> intrinsic_functions;
+    public static Dictionary<string, CustomFunction> user_defined_functions;
 
     static FunctionTable() {
-        inbuilt_functions = new Dictionary<string, Func<float[], float>>();
+        intrinsic_functions = new Dictionary<string, Function>();
+        user_defined_functions = new Dictionary<string, CustomFunction>();
         // Lambdas for float[] to float conversion. Because some intrinsics may want more params
         // Just basically functions that can be declared inline as parameters directly
-        inbuilt_functions.Add("sin", (float[] input) => Mathf.Sin(input[0]));
-        inbuilt_functions.Add("cos", (float[] input) => Mathf.Cos(input[0]));
-        inbuilt_functions.Add("tan", (float[] input) => Mathf.Tan(input[0]));
-        inbuilt_functions.Add("mod", (float[] input) => Mathf.Abs(input[0]));
-        inbuilt_functions.Add("log", (float[] input) => {
+        intrinsic_functions.Add("sin", new Function((float[] input) => Mathf.Sin(input[0]), 1));
+        intrinsic_functions.Add("cos", new Function((float[] input) => Mathf.Cos(input[0]), 1));
+        intrinsic_functions.Add("tan", new Function((float[] input) => Mathf.Tan(input[0]), 1));
+        intrinsic_functions.Add("mod", new Function((float[] input) => Mathf.Abs(input[0]), 1));
+        intrinsic_functions.Add("log", new Function((float[] input) => {
             // Slightly hacky way to get the line to extend downwards
             if (input[0] <= 0) return -10;
             return Mathf.Log(input[0]);
-        });
+        }, 1));
+        intrinsic_functions.Add("min", new Function((float[] input) => Mathf.Min(input[0], input[1]), 2));
+        intrinsic_functions.Add("max", new Function((float[] input) => Mathf.Max(input[0], input[1]), 2));
     }
 }
