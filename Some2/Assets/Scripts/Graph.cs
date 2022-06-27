@@ -30,6 +30,7 @@ public class Graph : MonoBehaviour {
 
         m_evaluator = new Evaluator(SourceCode);
         m_previous_working_ast = m_evaluator.Parse();
+        m_target_function = m_previous_working_ast;
 
         RecalculateGraph();
     }
@@ -106,8 +107,9 @@ public class Graph : MonoBehaviour {
         SourceCode = code;
         m_evaluator.Reset(SourceCode);
         ASTNode node = m_evaluator.Parse();
-        if (m_evaluator.errored)
-            return; //node = new NumberASTNode(new Token(TokenType.Number, "0", 0.0f));
+        if (m_evaluator.errored) {
+            return;
+        }
         m_evaluator.Dump(node);
         if (should_change) {
             m_target_function = node;

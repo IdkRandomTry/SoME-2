@@ -19,14 +19,15 @@ public enum TokenType {
     Comma,
     X,
     E,
+    PI,
 }
 
 public enum Precedence {
     None,
+    Term, // + -
+    Factor, // * /
     Power,
     Call,
-    Factor,
-    Term,
     Full,
 }
 
@@ -89,13 +90,20 @@ public class Lexer {
                     return new Token(TokenType.X, "x", null);
                 } else goto default;
             }
+            case 'p': {
+                if (Peek() == 'i') {
+                    current_index++;
+                    current_index++;
+                    return new Token(TokenType.PI, "pi", null);
+                } else goto default;
+            }
             case 'e': {
                 if (!char.IsLetterOrDigit(Peek())) {
                     current_index++;
                     return new Token(TokenType.E, "e", null);
                 } else goto default;
             }
-            default: {        
+            default: {
                 TokenType type = TokenType.Error;
                 int start_index = current_index;
                 object value = null; 
@@ -219,7 +227,6 @@ public class Parser {
                     if (!FunctionTable.intrinsic_functions.ContainsKey(name.Lexeme)) {
                         // User defined function
                         if (Match(TokenType.Equal)) {
-                            Debug.Log("Defined");
                             ASTNode value = ParseExpression();
                             List<string> var_names = new List<string>();
                             foreach (ASTNode node in args) {
@@ -227,7 +234,7 @@ public class Parser {
                                     Error("One or more arguments in function definition " + name.Lexeme + " is not an identifier");
                                 } else var_names.Add(((IdentASTNode)node).ident.Lexeme);
                             }
-                            FunctionTable.user_defined_functions.Add(name.Lexeme, new CustomFunction(value, var_names.Count, var_names.ToArray()));
+                            FunctionTable.user_defined_functions[name.Lexeme] = new CustomFunction(value, var_names.Count, var_names.ToArray());
                             return new NumberASTNode(new Token(TokenType.Number, "0", 0)); // Is this good?
                         } else {
                             // Is an actual call here
@@ -237,7 +244,6 @@ public class Parser {
                                 Error("Wrong amount of arguments passed to the function" + name.Lexeme + ". Expected " +
                                     FunctionTable.user_defined_functions[name.Lexeme].arity + " got " + args.Count);
                             }
-                            Debug.Log("Called");
                             return new CallASTNode(name, args.ToArray());
                         }
                     } else if (FunctionTable.intrinsic_functions[name.Lexeme].arity != args.Count) {
@@ -256,6 +262,10 @@ public class Parser {
             case TokenType.E:
                 Advance();
                 return new EASTNode(prev);
+                
+            case TokenType.PI:
+                Advance();
+                return new PIASTNode(prev);
         }
         Error("Unknown Expression starting with the token " + curr.Lexeme);
         return null;
@@ -275,7 +285,7 @@ public class Parser {
         return null;
     }
 
-    public ASTNode ParseExpression(Precedence prec = Precedence.Full) {
+    public ASTNode ParseExpression(Precedence prec = Precedence.None) {
         if (errored) return null;
         ASTNode left = ParsePrefixExpr();
         // @Error handling check node validity
@@ -287,7 +297,7 @@ public class Parser {
         while (true) {
             if (errored) return null;
             if (GetPrec(op) == Precedence.None) break;
-            if (GetPrec(op) <= prec) {
+            if (GetPrec(op) >= prec) {
                 left = ParseInfixExpr(op, GetPrec(op) + 1, left);
                 // @Error handling check node validity
                 op = prev;
@@ -405,6 +415,10 @@ public class Evaluator {
 
             case ASTNodeType.E: {
                 return 2.718281828459045f;
+            }
+
+            case ASTNodeType.PI: {
+                return Mathf.PI;
             }
         }
         return 0.0f;

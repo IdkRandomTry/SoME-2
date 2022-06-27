@@ -12,6 +12,7 @@ public enum ASTNodeType {
     Ident,
     X,
     E,
+    PI,
 }
 
 public abstract class ASTNode {
@@ -55,6 +56,18 @@ public class IntrinsicCallASTNode : ASTNode {
 
     public override string ToString() {
         return "IntrinsicCall AST Node " + func_name.Lexeme;
+    }
+}
+
+public class PIASTNode : ASTNode {
+    public Token token;
+
+    public PIASTNode(Token token) : base(ASTNodeType.PI) {
+        this.token = token;
+    }
+    
+    public override string ToString() {
+        return "PI AST Node pi";
     }
 }
 
