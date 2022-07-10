@@ -3,6 +3,7 @@ using TMPro;
 
 public class RunButton : MonoBehaviour {
     public GameObject ball;
+    public Goal goal;
 
     private Vector2 m_ball_recorded_pos;
     private Quaternion m_ball_recorded_rot;
@@ -24,6 +25,8 @@ public class RunButton : MonoBehaviour {
             ball.transform.SetPositionAndRotation(m_ball_recorded_pos, m_ball_recorded_rot);
             m_ball_rigidbody.velocity = new Vector3(0f,0f,0f); 
             m_ball_rigidbody.angularVelocity = 0f;
+            goal.m_pulling = false;
+            goal.m_force = goal.StartingForce;
         }
         
     }
