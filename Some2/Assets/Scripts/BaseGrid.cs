@@ -6,6 +6,7 @@ public class BaseGrid : MonoBehaviour
 {
 //    public GameObject basesqr;
     public float thickness, unit_length; 
+    public float axes_thickness_multiplier = 3;
     public Color colour;
     private RectTransform baserect;
     private Vector3 lefttop, rightbottom, center, centertop, centerbottom, unit, unit_vec;
@@ -15,13 +16,7 @@ public class BaseGrid : MonoBehaviour
 
     void Start()
     {
-//        duplicate();
         next_guidelines();
- /*       for (var i = 0; i < 4; i++)
-        {
-            Debug.Log("World Corner " + i + " : " + allcorners[i]);
-            edges.SetPosition(i, allcorners[i]);
-        }*/
     }
 
     private void next_guidelines() 
@@ -56,7 +51,7 @@ public class BaseGrid : MonoBehaviour
             guideline = new_guideline;
             if (i == -1)
             {
-                new_guideline.widthMultiplier = thickness*3;
+                new_guideline.widthMultiplier = thickness*axes_thickness_multiplier;
             }
         }
 
@@ -75,7 +70,7 @@ public class BaseGrid : MonoBehaviour
             guideline = new_guideline;
             if (i == -1)
             {
-                new_guideline.widthMultiplier = thickness*3;
+                new_guideline.widthMultiplier = thickness*axes_thickness_multiplier;
             }
         }
     }
