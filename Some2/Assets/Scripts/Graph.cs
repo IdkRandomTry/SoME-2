@@ -16,6 +16,7 @@ public class Graph : MonoBehaviour {
     [Range(0.001f, 1.0f)]
     public float Resolution;
     public string SourceCode;
+    public float WidthOverride = 0.1f;
 
     private float f(float x) {
         return Mathf.Lerp(
@@ -27,6 +28,8 @@ public class Graph : MonoBehaviour {
     void Start() {
         if (!m_line_renderer) m_line_renderer = GetComponent<LineRenderer>();
         if (!m_edge_collider) m_edge_collider = GetComponent<EdgeCollider2D>();
+
+        m_line_renderer.widthCurve = new AnimationCurve(new Keyframe(0, WidthOverride), new Keyframe(1, WidthOverride));
 
         m_evaluator = new Evaluator(SourceCode);
         m_previous_working_ast = m_evaluator.Parse();

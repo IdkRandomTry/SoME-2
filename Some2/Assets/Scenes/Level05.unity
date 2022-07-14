@@ -394,6 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Resolution: 0.1
   SourceCode: x^2
+  WidthOverride: 0.1
 --- !u!68 &594095277
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -1178,7 +1179,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 49fc3aa9959fbc94392d35e7b0835169, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.9137182, a: 1}
+  m_Color: {r: 0.81960785, g: 0.5411765, b: 0.24313726, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1482,6 +1483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Resolution: 0.1
   SourceCode: x^2
+  WidthOverride: 0.1
 --- !u!68 &1486280667
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -1550,16 +1552,16 @@ LineRenderer:
   - {x: 10.50694, y: 10.50694, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.16712421
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.16981125
+        value: 0.06289396
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
@@ -1942,6 +1944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Resolution: 0.1
   SourceCode: x^2
+  WidthOverride: 0.1
 --- !u!68 &1756596265
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -2016,7 +2019,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.16981125
+        value: 0.11950302
         inSlope: 0
         outSlope: 0
         tangentMode: 0

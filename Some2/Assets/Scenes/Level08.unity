@@ -470,6 +470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Resolution: 0.1
   SourceCode: sin(x)
+  WidthOverride: 0.1
 --- !u!68 &594095277
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -1468,7 +1469,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: f2ed8d40d8a185748b8484d38b144135, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.9137182, a: 1}
+  m_Color: {r: 0.81960785, g: 0.5411765, b: 0.24313726, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour {
     public Collider2D Circle;
@@ -30,8 +32,21 @@ public class Goal : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (!m_pulling) {
             if (other == Circle) {
-                Debug.Log("Test");
+                //Debug.Log("Test");
                 m_pulling = true;
+                CircleRigidbody.gravityScale = 0.0f;
+
+                string this_scene = SceneManager.GetActiveScene().name;
+                int this_scene_num = int.Parse(this_scene.Substring(5));
+                string next_scene_name;
+                if (this_scene_num < 9) {
+                    next_scene_name = "Level0" + (this_scene_num+1);
+                } else {
+                    next_scene_name = "Level" + (this_scene_num+1);
+                }
+
+                if (Application.CanStreamedLevelBeLoaded(next_scene_name))
+                    SceneManager.LoadScene(next_scene_name);
             }
         }
     }

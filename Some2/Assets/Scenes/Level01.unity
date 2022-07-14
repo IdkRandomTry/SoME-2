@@ -529,6 +529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Resolution: 0.1
   SourceCode: x
+  WidthOverride: 0.1
 --- !u!68 &594095277
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -1389,6 +1390,10 @@ PrefabInstance:
       propertyPath: Circle
       value: 
       objectReference: {fileID: 1248655562}
+    - target: {fileID: 6800485959763427092, guid: df235d21c7d0e884aa5bd2312c5346b0, type: 3}
+      propertyPath: NextSceneName
+      value: Level02
+      objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427092, guid: df235d21c7d0e884aa5bd2312c5346b0, type: 3}
       propertyPath: CircleRigidbody
       value: 
