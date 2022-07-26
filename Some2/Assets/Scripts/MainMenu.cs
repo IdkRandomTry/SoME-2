@@ -1,9 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
+    public Transition transition;
+
     public void OnStartButtonClick() {
-        SceneManager.LoadScene("Level01");
+        transition.SwitchSceneTo("Level01");
     }
 
     public void OnAlmanacButtonClick() {
@@ -11,7 +12,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void OnLevelSelectButtonClick() {
-        SceneManager.LoadScene("LevelSelect");
+        transition.SwitchSceneTo("LevelSelect");
     }
 
     public void OnQuitButtonClick() {

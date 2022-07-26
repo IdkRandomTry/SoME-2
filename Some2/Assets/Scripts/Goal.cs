@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour {
+    public Transition transition;
     public Collider2D Circle;
     public Rigidbody2D CircleRigidbody;
 
@@ -46,7 +46,7 @@ public class Goal : MonoBehaviour {
                 }
 
                 if (Application.CanStreamedLevelBeLoaded(next_scene_name))
-                    SceneManager.LoadScene(next_scene_name);
+                    transition.SwitchSceneTo(next_scene_name);
             }
         }
     }

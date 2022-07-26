@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelSelect : MonoBehaviour {
+    public Transition transition;
+
     public void OnBackButtonClick() {
-        SceneManager.LoadScene("MainMenu");
+        transition.SwitchSceneTo("MainMenu");
     }
 }
