@@ -32,7 +32,6 @@ public class Goal : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (!m_pulling) {
             if (other == Circle) {
-                //Debug.Log("Test");
                 m_pulling = true;
                 CircleRigidbody.gravityScale = 0.0f;
 
@@ -44,6 +43,7 @@ public class Goal : MonoBehaviour {
                 } else {
                     next_scene_name = "Level" + (this_scene_num+1);
                 }
+                PlayerProgress.latest_unlocked_level = this_scene_num + 1;
 
                 if (Application.CanStreamedLevelBeLoaded(next_scene_name))
                     transition.SwitchSceneTo(next_scene_name);

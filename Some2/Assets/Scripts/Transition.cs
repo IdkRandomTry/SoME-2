@@ -6,6 +6,7 @@ public class Transition : MonoBehaviour {
     private Animator[] animators;
     public float transition_time = 5.0f;
 
+    [System.Obsolete]
     void Start() {
         gameObject.SetActiveRecursively(true);
         animators = GetComponentsInChildren<Animator>();
