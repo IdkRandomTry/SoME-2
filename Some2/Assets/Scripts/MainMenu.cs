@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void OnAlmanacButtonClick() {
-        Debug.Log("Almanac Open");
+        transition.SwitchSceneTo("Almanac");
     }
 
     public void OnLevelSelectButtonClick() {
