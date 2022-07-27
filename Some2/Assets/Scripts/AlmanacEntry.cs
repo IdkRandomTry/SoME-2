@@ -6,5 +6,6 @@ public class AlmanacEntry : MonoBehaviour {
 
     public void OnClick() {
         content.sprite = TheNewContentImage;
+        content.color = new Color(1, 1, 1);
     }
 }
