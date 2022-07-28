@@ -18,21 +18,23 @@ public class AlmanacSelections : MonoBehaviour {
     }
 
     public void Switch(Sprite sprite) {
-        if (currently_presenting) {
-            ImageOne.sprite = sprite;
-            ImageOne.color = new Color(1, 1, 1);
-            ImageTwo.sprite = last_sprite;
-            if (last_sprite != null) ImageTwo.color = new Color(1, 1, 1);
-            ImageTwoAnimator.SetTrigger("Out");
-            ImageOneAnimator.SetTrigger("In");
-        } else {
-            ImageTwo.sprite = sprite;
-            ImageTwo.color = new Color(1, 1, 1);
-            ImageOne.sprite = last_sprite;
-            if (last_sprite != null) ImageOne.color = new Color(1, 1, 1);
-            ImageOneAnimator.SetTrigger("Out");
-            ImageTwoAnimator.SetTrigger("In");
+        if (last_sprite != sprite) {
+            if (currently_presenting) {
+                ImageOne.sprite = sprite;
+                ImageOne.color = new Color(1, 1, 1);
+                ImageTwo.sprite = last_sprite;
+                if (last_sprite != null) ImageTwo.color = new Color(1, 1, 1);
+                ImageTwoAnimator.SetTrigger("Out");
+                ImageOneAnimator.SetTrigger("In");
+            } else {
+                ImageTwo.sprite = sprite;
+                ImageTwo.color = new Color(1, 1, 1);
+                ImageOne.sprite = last_sprite;
+                if (last_sprite != null) ImageOne.color = new Color(1, 1, 1);
+                ImageOneAnimator.SetTrigger("Out");
+                ImageTwoAnimator.SetTrigger("In");
+            }
+            last_sprite = sprite;
         }
-        last_sprite = sprite;
     }
 }

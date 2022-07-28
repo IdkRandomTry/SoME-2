@@ -10,7 +10,7 @@ public static class PlayerProgress {
 }
 
 public static class AlmanacProgress {
-    public static int latest_unlocked_entry = 1;
+    public static int latest_unlocked_entry = 2;
 
     public static bool EntryIsUnlocked(int id) {
         return id <= latest_unlocked_entry;
