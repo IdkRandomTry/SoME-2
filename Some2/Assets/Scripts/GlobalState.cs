@@ -11,8 +11,6 @@ public static class PlayerProgress {
 
 public static class AlmanacProgress {
     public static int latest_unlocked_entry = 1;
-    // Set by AlmanacEntry.cs
-    public static GameObject last_open_entry;
 
     public static bool EntryIsUnlocked(int id) {
         return id <= latest_unlocked_entry;
