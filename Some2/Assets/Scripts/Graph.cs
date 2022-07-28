@@ -95,11 +95,11 @@ public class Graph : MonoBehaviour {
 
     public IEnumerator LerpT() {
         // Configurable resolution here too?
-        float step = 0.004f;
-        for (float x = 0; x <= 1 + step; x += step) {
+        float step = 0.8f;
+        for (float x = 0; x <= 1 + step; x += step * Time.deltaTime) {
             // Configurable Easing function here?
             // Cubic Ease In-Out from easings.net
-            t = x < 0.5 ? 4 * x*x*x : 1 - ((-2 * x + 2)*(-2 * x + 2)*(-2 * x + 2)) / 2;
+            t = (x < 0.5 ? 4 * x*x*x : 1 - ((-2 * x + 2)*(-2 * x + 2)*(-2 * x + 2)) / 2);
             yield return null;
         }
     }
