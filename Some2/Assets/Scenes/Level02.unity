@@ -1335,7 +1335,7 @@ PrefabInstance:
       objectReference: {fileID: 1154624059}
     - target: {fileID: 3392220204961499446, guid: afe86a418924ddc40b9897a7c2cf50f2, type: 3}
       propertyPath: UnlockedAlmanacEntry
-      value: -1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3392220204961499446, guid: afe86a418924ddc40b9897a7c2cf50f2, type: 3}
       propertyPath: AllCircles.Array.data[0]
