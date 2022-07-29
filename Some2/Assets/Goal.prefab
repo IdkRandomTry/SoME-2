@@ -114,10 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26a6592ec3d0cc47b139f5af0b49d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Circle: {fileID: 0}
-  CircleRigidbody: {fileID: 0}
+  CirclesAllowed:
+  - {fileID: 0}
   MaxForce: 100
   StartingForce: 20
   ForceIncreaseSpeed: 20
-  m_pulling: 0
-  m_force: 0
+  m_pulling_circles: 
+  m_forces_on_circles: []

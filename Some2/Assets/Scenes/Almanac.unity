@@ -314,7 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 2116951044}
   TheNewContentImage: {fileID: 21300000, guid: 9e9c7ebd8bb720e42981361bf037e5d4, type: 3}
-  ID: 1
+  ID: 3
 --- !u!114 &283336166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,11 +444,11 @@ RectTransform:
   - {fileID: 866126865}
   - {fileID: 731436923}
   m_Father: {fileID: 2116951043}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -170, y: 190}
+  m_AnchoredPosition: {x: -10, y: 190}
   m_SizeDelta: {x: 150, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &337932563
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 2116951044}
   TheNewContentImage: {fileID: 21300000, guid: edff15c11b94b8d4ca8460c961ba2d70, type: 3}
-  ID: 1
+  ID: 2
 --- !u!114 &337932564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1660,11 +1660,11 @@ RectTransform:
   - {fileID: 973339466}
   - {fileID: 714389932}
   m_Father: {fileID: 2116951043}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: 190}
+  m_AnchoredPosition: {x: -170, y: 190}
   m_SizeDelta: {x: 150, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1030508273
@@ -1681,7 +1681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 2116951044}
   TheNewContentImage: {fileID: 21300000, guid: a7a005e1fe815b84da482aaa2ddde294, type: 3}
-  ID: 2
+  ID: 1
 --- !u!114 &1030508274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2111,7 +2111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 2116951044}
   TheNewContentImage: {fileID: 21300000, guid: 1f36854c2f4a68c4a94dcb9338a53ff7, type: 3}
-  ID: 1
+  ID: 4
 --- !u!114 &1660617600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2522,8 +2522,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 337932562}
   - {fileID: 1030508272}
+  - {fileID: 337932562}
   - {fileID: 283336164}
   - {fileID: 1660617598}
   m_Father: {fileID: 1293903042}

@@ -1,53 +1,63 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour {
-    public Transition transition;
-    public Collider2D Circle;
-    public Rigidbody2D CircleRigidbody;
+    public Circle[] CirclesAllowed;
 
     public float MaxForce;
     public float StartingForce;
     public float ForceIncreaseSpeed;
 
     [HideInInspector]
-    public bool m_pulling = false;
+    public bool[] m_pulling_circles;
     [HideInInspector]
-    public float m_force;
+    public float[] m_forces_on_circles;
 
     void Start() {
-        m_pulling = false;
-        m_force = StartingForce;
+        m_pulling_circles = new bool[CirclesAllowed.Length];
+        m_forces_on_circles = new float[CirclesAllowed.Length];
+
+        int i = 0;
+        foreach (Circle c in CirclesAllowed) {
+            m_pulling_circles[i] = false;
+            m_forces_on_circles[i] = StartingForce;
+            i++;
+        }
     }
 
     void Update() {
-        if (m_pulling) {
-            Vector2 target_force = new Vector2(transform.position.x, transform.position.y) - CircleRigidbody.position;
-            target_force *= m_force;
-            CircleRigidbody.AddForce(target_force);
-            m_force += Mathf.Min(MaxForce, Time.deltaTime * ForceIncreaseSpeed);
+        for (int i = 0; i < CirclesAllowed.Length; i++) {
+            if (m_pulling_circles[i]) {
+                Vector2 target_force = new Vector2(transform.position.x, transform.position.y) - CirclesAllowed[i].my_rigidbody.position;
+                target_force *= m_forces_on_circles[i];
+                CirclesAllowed[i].my_rigidbody.AddForce(target_force);
+                m_forces_on_circles[i] += Mathf.Min(MaxForce, Time.deltaTime * ForceIncreaseSpeed);
+            }
         }
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (!m_pulling) {
-            if (other == Circle) {
-                m_pulling = true;
-                CircleRigidbody.gravityScale = 0.0f;
+        // LOL
+        int the_ball_that_touched = -1;
+        for (int i = 0; i < CirclesAllowed.Length; i++) {
+            if (CirclesAllowed[i].my_collider == other)
+                the_ball_that_touched = i;
+        }
 
-                string this_scene = SceneManager.GetActiveScene().name;
-                int this_scene_num = int.Parse(this_scene.Substring(5));
-                string next_scene_name;
-                if (this_scene_num < 9) {
-                    next_scene_name = "Level0" + (this_scene_num+1);
-                } else {
-                    next_scene_name = "Level" + (this_scene_num+1);
-                }
-                PlayerProgress.latest_unlocked_level = this_scene_num + 1;
+        if (the_ball_that_touched != -1 && !m_pulling_circles[the_ball_that_touched]) {
+            m_pulling_circles[the_ball_that_touched] = true;
+            CirclesAllowed[the_ball_that_touched].my_rigidbody.gravityScale = 0.0f;
+            CirclesAllowed[the_ball_that_touched].m_found_a_goal = true;
+        }
+    }
 
-                if (Application.CanStreamedLevelBeLoaded(next_scene_name))
-                    transition.SwitchSceneTo(next_scene_name);
-            }
+    public void StopPulling() {
+        int i = 0;
+        foreach (Circle c in CirclesAllowed) {
+            c.m_found_a_goal = false;
+            c.my_rigidbody.gravityScale = 1.0f;
+            m_pulling_circles[i] = false;
+            m_forces_on_circles[i] = StartingForce;
+            i++;
         }
     }
 }
