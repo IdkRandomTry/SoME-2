@@ -1,5 +1,9 @@
 using UnityEngine;
 
+public static class OtherStuff {
+    public static bool WasEntryUnlockedForTransition = false;
+}
+
 public static class ApplicationLifetime {
     [RuntimeInitializeOnLoadMethod]
     public static void OnLoad() {

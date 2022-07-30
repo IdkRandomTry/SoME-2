@@ -38,10 +38,12 @@ public class Level : MonoBehaviour {
         if (!AlmanacProgress.EntryIsUnlocked(UnlockedAlmanacEntry)) {
             AlmanacProgress.latest_unlocked_note = UnlockedAlmanacEntry;
             AlmanacProgress.UpdatePlayerPrefs();
+            OtherStuff.WasEntryUnlockedForTransition = true;
         }
         if (!AlmanacProgress.SyntaxIsUnlocked(UnlockedAlmanacSyntaxEntry)) {
             AlmanacProgress.latest_unlocked_syntax_note = UnlockedAlmanacSyntaxEntry;
             AlmanacProgress.UpdatePlayerPrefs();
+            OtherStuff.WasEntryUnlockedForTransition = true;
         }
 
         if (Application.CanStreamedLevelBeLoaded(next_scene_name)) {
