@@ -6,6 +6,7 @@ public class Level : MonoBehaviour {
 
     public Transition transition;
     public int UnlockedAlmanacEntry = -1; // -1 is default for no entry unlock
+    public int UnlockedAlmanacSyntaxEntry = -1; // -1 is default for no entry unlock
     private bool m_is_transitioning;
 
     void Start() {
@@ -35,7 +36,11 @@ public class Level : MonoBehaviour {
         PlayerProgress.UpdatePlayerPrefs();
 
         if (!AlmanacProgress.EntryIsUnlocked(UnlockedAlmanacEntry)) {
-            AlmanacProgress.latest_unlocked_entry = UnlockedAlmanacEntry;
+            AlmanacProgress.latest_unlocked_note = UnlockedAlmanacEntry;
+            AlmanacProgress.UpdatePlayerPrefs();
+        }
+        if (!AlmanacProgress.SyntaxIsUnlocked(UnlockedAlmanacSyntaxEntry)) {
+            AlmanacProgress.latest_unlocked_syntax_note = UnlockedAlmanacSyntaxEntry;
             AlmanacProgress.UpdatePlayerPrefs();
         }
 
