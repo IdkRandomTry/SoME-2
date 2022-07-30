@@ -19,6 +19,16 @@ public static class PlayerProgress {
         int l = int.Parse(s.Substring(5));
         return l <= latest_unlocked_level;
     }
+
+    public static string CurrentSceneName() {
+        string next_scene_name;
+        if (latest_unlocked_level < 9) {
+            next_scene_name = "Level0" + (latest_unlocked_level);
+        } else {
+            next_scene_name = "Level" + (latest_unlocked_level);
+        }
+        return next_scene_name;
+    }
 }
 
 public static class AlmanacProgress {

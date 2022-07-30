@@ -21,6 +21,12 @@ public class RunButton : MonoBehaviour {
         }
     }
 
+    void Update() {
+        foreach (Circle c in balls) {
+            if (c.m_hit_a_side) OnClick();
+        }
+    }
+
     public void OnClick() {
         m_simulating = !m_simulating;
         
@@ -34,6 +40,7 @@ public class RunButton : MonoBehaviour {
                 c.transform.SetPositionAndRotation(m_ball_recorded_pos[i], m_ball_recorded_rot[i]);
                 c.my_rigidbody.velocity = new Vector3(0f,0f,0f); 
                 c.my_rigidbody.angularVelocity = 0f;
+                c.m_hit_a_side = false;
                 i++;
             }
 

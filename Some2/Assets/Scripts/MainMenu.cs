@@ -4,7 +4,9 @@ public class MainMenu : MonoBehaviour {
     public Transition transition;
 
     public void OnStartButtonClick() {
-        transition.SwitchSceneTo("Level01");
+        if (Application.CanStreamedLevelBeLoaded(PlayerProgress.CurrentSceneName())) {
+            transition.SwitchSceneTo(PlayerProgress.CurrentSceneName());
+        } else transition.SwitchSceneTo("Level01");
     }
 
     public void OnAlmanacButtonClick() {
