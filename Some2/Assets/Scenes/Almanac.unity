@@ -428,7 +428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &198292390
 Animator:
   serializedVersion: 4
@@ -1223,7 +1223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 951172970}
-  TheNewContentImage: {fileID: 21300000, guid: 620af1688917d4d47855a0726d05ccd1, type: 3}
+  TheNewContentImage: {fileID: 21300000, guid: 814906130f46dd2448c0c5972674bfc0, type: 3}
   ID: 7
   IsSyntaxPage: 0
 --- !u!114 &368429677
