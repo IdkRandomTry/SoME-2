@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Graph : MonoBehaviour {
     private LineRenderer m_line_renderer;
-    private EdgeCollider2D m_edge_collider;
+    private int m_current_collider_index = 0;
+    private List<EdgeCollider2D> m_edge_colliders = new List<EdgeCollider2D>();
 
     private ASTNode m_previous_working_ast;
     private ASTNode m_target_function;
@@ -27,7 +28,10 @@ public class Graph : MonoBehaviour {
 
     void Start() {
         if (!m_line_renderer) m_line_renderer = GetComponent<LineRenderer>();
-        if (!m_edge_collider) m_edge_collider = GetComponent<EdgeCollider2D>();
+        // Remove all edge colliders
+        m_current_collider_index = 0;
+        m_edge_colliders.Clear();
+        m_edge_colliders.Add(GetComponent<EdgeCollider2D>());
 
         m_line_renderer.widthCurve = new AnimationCurve(new Keyframe(0, WidthOverride), new Keyframe(1, WidthOverride));
 
@@ -46,6 +50,16 @@ public class Graph : MonoBehaviour {
         return v.x >= -half_width && v.x <= half_width && v.y >= -half_height && v.y <= half_height;
     }
 
+    private bool IsBelowCam(Vector2 v) {
+        float half_height = Camera.main.orthographicSize + tolerance;
+        return v.y == -half_height;
+    }
+
+    private bool IsAboveCam(Vector2 v) {
+        float half_height = Camera.main.orthographicSize + tolerance;
+        return v.y == half_height;
+    }
+
     private void ClampToCam(ref Vector2 v) {
         float half_height = Camera.main.orthographicSize + tolerance;
         float half_width = Camera.main.orthographicSize * Camera.main.aspect + tolerance;
@@ -53,7 +67,20 @@ public class Graph : MonoBehaviour {
         v.y = Mathf.Clamp(v.y, -half_height, half_height);
     }
 
+    private void NextEdgeCollider() {
+        m_current_collider_index++;
+        if (m_current_collider_index == m_edge_colliders.Count) {
+            EdgeCollider2D new_collider = gameObject.AddComponent<EdgeCollider2D>();
+            new_collider.offset = m_edge_colliders[0].offset;
+            m_edge_colliders.Add(new_collider);
+        } else {
+            m_edge_colliders[m_current_collider_index].enabled = true;
+        }
+    }
+
     private void RecalculateGraph() {
+        m_current_collider_index = 0;
+
         List<Vector2> points2D = new List<Vector2>();
         List<Vector3> points3D = new List<Vector3>();
 
@@ -67,8 +94,26 @@ public class Graph : MonoBehaviour {
             curr = next;
             next = new Vector2(x, f(x));
 
-            if (!(IsInCameraBounds(last) & IsInCameraBounds(next) && IsInCameraBounds(curr))) {
+            if (!(IsInCameraBounds(last) && IsInCameraBounds(next) && IsInCameraBounds(curr))) {
                 ClampToCam(ref curr);
+            }
+
+            if ((IsAboveCam(last) && IsBelowCam(curr)) || (IsBelowCam(last) && IsAboveCam(curr))) {
+                m_edge_colliders[m_current_collider_index].SetPoints(points2D);
+                NextEdgeCollider();
+                points2D.Clear();
+
+                points3D.Add(new Vector3(last.x, last.y, -360));
+                points3D.Add(new Vector3(curr.x, curr.y, -360));
+            }
+
+            if (float.IsNaN(curr.y)) {
+                if (float.IsNaN(next.y)) {
+                    continue;
+                } else {
+                    curr.x = next.x;
+                    curr.y = -Camera.main.orthographicSize - tolerance;
+                }
             }
 
             points2D.Add(curr);
@@ -79,7 +124,10 @@ public class Graph : MonoBehaviour {
 
         m_line_renderer.positionCount = v3d.Length;
         m_line_renderer.SetPositions(v3d);
-        m_edge_collider.SetPoints(points2D);
+        m_edge_colliders[m_current_collider_index].SetPoints(points2D);
+
+        for (int i = m_current_collider_index + 1; i < m_edge_colliders.Count; i++)
+            m_edge_colliders[i].enabled = false;
     }
 
     void Update() {

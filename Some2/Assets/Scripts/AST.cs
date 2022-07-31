@@ -172,6 +172,7 @@ public static class FunctionTable {
         intrinsic_functions.Add("cos", new Function((float[] input) => Mathf.Cos(input[0]), 1));
         intrinsic_functions.Add("tan", new Function((float[] input) => Mathf.Tan(input[0]), 1));
         intrinsic_functions.Add("mod", new Function((float[] input) => Mathf.Abs(input[0]), 1));
+        intrinsic_functions.Add("abs", new Function((float[] input) => Mathf.Abs(input[0]), 1));
         intrinsic_functions.Add("log", new Function((float[] input) => {
             // Slightly hacky way to get the line to extend downwards
             if (input[0] <= 0) return -10;
