@@ -703,8 +703,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.7623763, g: 0.36765754, b: 0.9622642, a: 1}
-      key1: {r: 1, g: 0, b: 0.4828682, a: 1}
+      key0: {r: 0.3529412, g: 1, b: 1, a: 1}
+      key1: {r: 0.3529412, g: 0, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -833,7 +833,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 20246c219d23a664fac607ae2a4466f2, type: 3}
-  m_Color: {r: 0.41176474, g: 0.40000004, b: 0.47058827, a: 1}
+  m_Color: {r: 0.23529413, g: 0.23529413, b: 0.23529413, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1639,6 +1639,7 @@ MonoBehaviour:
   m_found_a_goal: 0
   my_rigidbody: {fileID: 0}
   my_collider: {fileID: 0}
+  m_hit_a_side: 0
 --- !u!1 &1284349257
 GameObject:
   m_ObjectHideFlags: 0
@@ -2240,7 +2241,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 20246c219d23a664fac607ae2a4466f2, type: 3}
-  m_Color: {r: 0.34901962, g: 0.2509804, b: 0.29004085, a: 1}
+  m_Color: {r: 0.12941177, g: 0.12941177, b: 0.12941177, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2282,10 +2283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87cf7874a515901478a33880983febd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thickness: 0.025
+  thickness: 0.02
   unit_length: 1
-  axes_thickness_multiplier: 2
-  colour: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0.6862745}
+  axes_thickness_multiplier: 3
+  colour: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 0.78431374}
 --- !u!1001 &2037578579
 PrefabInstance:
   m_ObjectHideFlags: 0
