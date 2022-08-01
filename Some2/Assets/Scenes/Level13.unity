@@ -1055,13 +1055,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1248655562}
     - target: {fileID: 6800485959763427092, guid: 056dc5b97e5d67741aa44b7a917dee2c, type: 3}
+      propertyPath: MaxForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427092, guid: 056dc5b97e5d67741aa44b7a917dee2c, type: 3}
       propertyPath: transition
       value: 
       objectReference: {fileID: 1424453251}
     - target: {fileID: 6800485959763427092, guid: 056dc5b97e5d67741aa44b7a917dee2c, type: 3}
+      propertyPath: StartingForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427092, guid: 056dc5b97e5d67741aa44b7a917dee2c, type: 3}
       propertyPath: CircleRigidbody
       value: 
       objectReference: {fileID: 1248655563}
+    - target: {fileID: 6800485959763427092, guid: 056dc5b97e5d67741aa44b7a917dee2c, type: 3}
+      propertyPath: ForceIncreaseSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427092, guid: 056dc5b97e5d67741aa44b7a917dee2c, type: 3}
       propertyPath: CirclesAllowed.Array.data[0]
       value: 
@@ -1072,11 +1084,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427095, guid: 056dc5b97e5d67741aa44b7a917dee2c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.986061
+      value: -4.07
       objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427095, guid: 056dc5b97e5d67741aa44b7a917dee2c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0082222
+      value: -2.44
       objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427095, guid: 056dc5b97e5d67741aa44b7a917dee2c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1207,7 +1219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248655559}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.05, y: 3.95, z: 0}
+  m_LocalPosition: {x: -0.4, y: 3.95, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1474,7 +1486,7 @@ PrefabInstance:
       objectReference: {fileID: 1424453251}
     - target: {fileID: 3392220204961499446, guid: 9d9be6a9f782fd243b18452c2defebed, type: 3}
       propertyPath: UnlockedAlmanacEntry
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3392220204961499446, guid: 9d9be6a9f782fd243b18452c2defebed, type: 3}
       propertyPath: AllCircles.Array.size

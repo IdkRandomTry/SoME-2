@@ -865,13 +865,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1248655562}
     - target: {fileID: 6800485959763427092, guid: 6168acb437a15334faaaf0c538bd8e26, type: 3}
+      propertyPath: MaxForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427092, guid: 6168acb437a15334faaaf0c538bd8e26, type: 3}
       propertyPath: transition
       value: 
       objectReference: {fileID: 1424453251}
     - target: {fileID: 6800485959763427092, guid: 6168acb437a15334faaaf0c538bd8e26, type: 3}
+      propertyPath: StartingForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427092, guid: 6168acb437a15334faaaf0c538bd8e26, type: 3}
       propertyPath: CircleRigidbody
       value: 
       objectReference: {fileID: 1248655563}
+    - target: {fileID: 6800485959763427092, guid: 6168acb437a15334faaaf0c538bd8e26, type: 3}
+      propertyPath: ForceIncreaseSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427092, guid: 6168acb437a15334faaaf0c538bd8e26, type: 3}
       propertyPath: CirclesAllowed.Array.data[0]
       value: 
