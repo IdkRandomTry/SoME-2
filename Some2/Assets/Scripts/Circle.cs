@@ -17,6 +17,7 @@ public class Circle : MonoBehaviour {
         my_collider = GetComponent<CircleCollider2D>();
         m_found_a_goal = false;
         m_hit_a_side = false;
+        my_collider.enabled = true;
     }
 
     private bool TouchedCameraFrustum(Vector2 v) {

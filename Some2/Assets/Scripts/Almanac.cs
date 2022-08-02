@@ -7,6 +7,7 @@ public class Almanac : MonoBehaviour {
     public Animator ImageTwoAnimator;
     public UnityEngine.UI.Image ImageOne;
     public UnityEngine.UI.Image ImageTwo;
+    public UnityEngine.UI.Button BackButton;
 
     private Sprite m_last_sprite;
 
@@ -43,6 +44,7 @@ public class Almanac : MonoBehaviour {
     }
     
     public void OnBackButtonClick() {
+        BackButton.interactable = false;
         transition.SwitchSceneTo("MainMenu");
     }
 }

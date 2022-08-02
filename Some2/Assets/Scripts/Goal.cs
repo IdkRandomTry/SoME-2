@@ -46,6 +46,7 @@ public class Goal : MonoBehaviour {
         if (the_ball_that_touched != -1 && !m_pulling_circles[the_ball_that_touched]) {
             m_pulling_circles[the_ball_that_touched] = true;
             CirclesAllowed[the_ball_that_touched].my_rigidbody.gravityScale = 0.0f;
+            CirclesAllowed[the_ball_that_touched].my_collider.enabled = false;
             CirclesAllowed[the_ball_that_touched].m_found_a_goal = true;
         }
     }
@@ -55,6 +56,7 @@ public class Goal : MonoBehaviour {
         foreach (Circle c in CirclesAllowed) {
             c.m_found_a_goal = false;
             c.my_rigidbody.gravityScale = 1.0f;
+            c.my_collider.enabled = true;
             m_pulling_circles[i] = false;
             m_forces_on_circles[i] = StartingForce;
             i++;

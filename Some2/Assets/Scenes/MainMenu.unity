@@ -1128,6 +1128,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 459274054}
+  StartButton: {fileID: 1915904672}
+  AlmanacButton: {fileID: 350291777}
+  LevelSelectButton: {fileID: 1848621887}
+  QuitButton: {fileID: 929820479}
 --- !u!1 &1688829195
 GameObject:
   m_ObjectHideFlags: 0

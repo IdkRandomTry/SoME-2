@@ -32,7 +32,8 @@ public class Level : MonoBehaviour {
         } else {
             next_scene_name = "Level" + (this_scene_num+1);
         }
-        PlayerProgress.latest_unlocked_level = this_scene_num + 1;
+        if (PlayerProgress.latest_unlocked_level == this_scene_num)
+            PlayerProgress.latest_unlocked_level = this_scene_num + 1;
         PlayerProgress.UpdatePlayerPrefs();
 
         if (!AlmanacProgress.EntryIsUnlocked(UnlockedAlmanacEntry)) {
