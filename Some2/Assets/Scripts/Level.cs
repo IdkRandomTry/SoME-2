@@ -8,6 +8,7 @@ public class Level : MonoBehaviour {
     public int UnlockedAlmanacEntry = -1; // -1 is default for no entry unlock
     public int UnlockedAlmanacSyntaxEntry = -1; // -1 is default for no entry unlock
     private bool m_is_transitioning;
+    public bool IsTutorial = false;
 
     void Start() {
         m_is_transitioning = false;
@@ -24,6 +25,13 @@ public class Level : MonoBehaviour {
     }
 
     void AllGoalsActive() {
+        if (IsTutorial) {
+            OtherStuff.PlayedTutorial = true;
+            OtherStuff.UpdatePlayerPrefs();
+            transition.SwitchSceneTo("Level01");
+            return;
+        }
+
         string this_scene = SceneManager.GetActiveScene().name;
         int this_scene_num = int.Parse(this_scene.Substring(5));
         string next_scene_name;

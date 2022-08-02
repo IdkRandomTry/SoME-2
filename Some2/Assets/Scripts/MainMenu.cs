@@ -9,9 +9,13 @@ public class MainMenu : MonoBehaviour {
 
     public void OnStartButtonClick() {
         StartButton.interactable = false;
-        if (Application.CanStreamedLevelBeLoaded(PlayerProgress.CurrentSceneName())) {
-            transition.SwitchSceneTo(PlayerProgress.CurrentSceneName());
-        } else transition.SwitchSceneTo("Level01");
+        if (OtherStuff.PlayedTutorial) {
+            if (Application.CanStreamedLevelBeLoaded(PlayerProgress.CurrentSceneName())) {
+                transition.SwitchSceneTo(PlayerProgress.CurrentSceneName());
+            } else transition.SwitchSceneTo("Level01");
+        } else {
+            transition.SwitchSceneTo("Tutorial");
+        }
     }
 
     public void OnAlmanacButtonClick() {

@@ -108,12 +108,7 @@ public class Graph : MonoBehaviour {
             }
 
             if (float.IsNaN(curr.y)) {
-                if (float.IsNaN(next.y)) {
-                    continue;
-                } else {
-                    curr.x = next.x;
-                    curr.y = -Camera.main.orthographicSize - tolerance;
-                }
+                continue;
             }
 
             points2D.Add(curr);

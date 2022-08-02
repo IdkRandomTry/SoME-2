@@ -1,15 +1,21 @@
 using UnityEngine;
 
-public static class OtherStuff {
-    public static bool WasEntryUnlockedForTransition = false;
-}
-
 public static class ApplicationLifetime {
     [RuntimeInitializeOnLoadMethod]
     public static void OnLoad() {
         PlayerProgress.latest_unlocked_level = PlayerPrefs.GetInt("LevelProgress", 1);
         AlmanacProgress.latest_unlocked_note = PlayerPrefs.GetInt("AlmanacProgress_Note", 0);
         AlmanacProgress.latest_unlocked_syntax_note = PlayerPrefs.GetInt("AlmanacProgress_Syntax", 0);
+        OtherStuff.PlayedTutorial = PlayerPrefs.GetInt("Tutorial_Played", 0) == 0 ? false : true;
+    }
+}
+
+public static class OtherStuff {
+    public static bool WasEntryUnlockedForTransition = false;
+    public static bool PlayedTutorial;
+
+    public static void UpdatePlayerPrefs() {
+        PlayerPrefs.SetInt("Tutorial_Played", PlayedTutorial ? 1 : 0);
     }
 }
 
