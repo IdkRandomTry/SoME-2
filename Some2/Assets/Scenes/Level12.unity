@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Resolution: 0.1
-  SourceCode: min(-(x^2)+2, x)
+  SourceCode: x
   WidthOverride: 0.1
 --- !u!68 &296778250
 EdgeCollider2D:
@@ -1059,6 +1059,18 @@ PrefabInstance:
       propertyPath: CirclesAllowed.Array.data[0]
       value: 
       objectReference: {fileID: 1248655564}
+    - target: {fileID: 6800485959763427094, guid: 11f751469d37f104ca116e3eda6d22f7, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427094, guid: 11f751469d37f104ca116e3eda6d22f7, type: 3}
+      propertyPath: m_Color.g
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427094, guid: 11f751469d37f104ca116e3eda6d22f7, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427095, guid: 11f751469d37f104ca116e3eda6d22f7, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1467,7 +1479,7 @@ PrefabInstance:
       objectReference: {fileID: 1424453251}
     - target: {fileID: 3392220204961499446, guid: 77632191fdf352e41ab1fd2085c5fe6d, type: 3}
       propertyPath: UnlockedAlmanacEntry
-      value: 4
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3392220204961499446, guid: 77632191fdf352e41ab1fd2085c5fe6d, type: 3}
       propertyPath: AllCircles.Array.size
@@ -1806,7 +1818,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "min(-(x^2) + 2, x)\u200B"
+  m_text: "x\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2171,7 +2183,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: min(-(x^2) + 2, x)
+  m_Text: x
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -2233,7 +2245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a36b4a21d7836847b706dc2dde07b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultText: min(-(x^2) + 2, x)
+  DefaultText: x
 --- !u!1 &1835694472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,6 +2447,10 @@ PrefabInstance:
       value: Home
       objectReference: {fileID: 0}
     - target: {fileID: 1998891693099438917, guid: 33641832dd409ca46a57dd1bd9c441af, type: 3}
+      propertyPath: TheButton
+      value: 
+      objectReference: {fileID: 1976003967}
+    - target: {fileID: 1998891693099438917, guid: 33641832dd409ca46a57dd1bd9c441af, type: 3}
       propertyPath: transition
       value: 
       objectReference: {fileID: 1424453251}
@@ -2529,6 +2545,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6443272645110720323, guid: 33641832dd409ca46a57dd1bd9c441af, type: 3}
   m_PrefabInstance: {fileID: 1976003965}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1976003967 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6728860264634139006, guid: 33641832dd409ca46a57dd1bd9c441af, type: 3}
+  m_PrefabInstance: {fileID: 1976003965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2031537603
 GameObject:
   m_ObjectHideFlags: 0

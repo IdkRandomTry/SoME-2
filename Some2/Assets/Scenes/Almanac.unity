@@ -3825,11 +3825,11 @@ RectTransform:
   - {fileID: 1806711652}
   - {fileID: 1080971412}
   m_Father: {fileID: 2116951043}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 149.99997, y: 110}
+  m_AnchoredPosition: {x: -10, y: 110}
   m_SizeDelta: {x: 150, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &995330323
@@ -3846,7 +3846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 951172970}
   TheNewContentImage: {fileID: 21300000, guid: ab5f34968066ba647b6866ea7116f3a5, type: 3}
-  ID: 5
+  ID: 4
   IsSyntaxPage: 1
 --- !u!114 &995330324
 MonoBehaviour:
@@ -3977,11 +3977,11 @@ RectTransform:
   - {fileID: 973339466}
   - {fileID: 714389932}
   m_Father: {fileID: 2116951043}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -170, y: 110}
+  m_AnchoredPosition: {x: 150, y: 110}
   m_SizeDelta: {x: 150, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1030508273
@@ -3998,7 +3998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 951172970}
   TheNewContentImage: {fileID: 21300000, guid: f53bcd48580b598409388b00ef06aac5, type: 3}
-  ID: 4
+  ID: 5
   IsSyntaxPage: 1
 --- !u!114 &1030508274
 MonoBehaviour:
@@ -6569,11 +6569,11 @@ RectTransform:
   - {fileID: 2042612586}
   - {fileID: 715698792}
   m_Father: {fileID: 2116951043}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: 110}
+  m_AnchoredPosition: {x: -170, y: 110}
   m_SizeDelta: {x: 150, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1765966528
@@ -6590,7 +6590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 951172970}
   TheNewContentImage: {fileID: 21300000, guid: 1df49ea4fdd8279408465c99baad1410, type: 3}
-  ID: 5
+  ID: 4
   IsSyntaxPage: 1
 --- !u!114 &1765966529
 MonoBehaviour:
@@ -7937,9 +7937,9 @@ RectTransform:
   - {fileID: 1146192142}
   - {fileID: 283336164}
   - {fileID: 1660617598}
-  - {fileID: 1030508272}
   - {fileID: 1765966527}
   - {fileID: 995330322}
+  - {fileID: 1030508272}
   m_Father: {fileID: 1293903042}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

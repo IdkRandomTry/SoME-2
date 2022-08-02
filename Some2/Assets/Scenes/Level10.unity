@@ -888,6 +888,18 @@ PrefabInstance:
       propertyPath: CirclesAllowed.Array.data[0]
       value: 
       objectReference: {fileID: 1248655564}
+    - target: {fileID: 6800485959763427094, guid: ffbdb0055e81a104da72e37f1c664be1, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427094, guid: ffbdb0055e81a104da72e37f1c664be1, type: 3}
+      propertyPath: m_Color.g
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427094, guid: ffbdb0055e81a104da72e37f1c664be1, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427095, guid: ffbdb0055e81a104da72e37f1c664be1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1833,6 +1845,10 @@ PrefabInstance:
       value: Home
       objectReference: {fileID: 0}
     - target: {fileID: 1998891693099438917, guid: 8674a8d03a9241a4790f52e4a76abe0f, type: 3}
+      propertyPath: TheButton
+      value: 
+      objectReference: {fileID: 1976003967}
+    - target: {fileID: 1998891693099438917, guid: 8674a8d03a9241a4790f52e4a76abe0f, type: 3}
       propertyPath: transition
       value: 
       objectReference: {fileID: 1424453251}
@@ -1927,6 +1943,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6443272645110720323, guid: 8674a8d03a9241a4790f52e4a76abe0f, type: 3}
   m_PrefabInstance: {fileID: 1976003965}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1976003967 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6728860264634139006, guid: 8674a8d03a9241a4790f52e4a76abe0f, type: 3}
+  m_PrefabInstance: {fileID: 1976003965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2031537603
 GameObject:
   m_ObjectHideFlags: 0

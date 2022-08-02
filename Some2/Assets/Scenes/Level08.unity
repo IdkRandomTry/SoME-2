@@ -276,6 +276,18 @@ PrefabInstance:
       propertyPath: CirclesAllowed.Array.data[0]
       value: 
       objectReference: {fileID: 1248655564}
+    - target: {fileID: 6800485959763427094, guid: df235d21c7d0e884aa5bd2312c5346b0, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427094, guid: df235d21c7d0e884aa5bd2312c5346b0, type: 3}
+      propertyPath: m_Color.g
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427094, guid: df235d21c7d0e884aa5bd2312c5346b0, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427095, guid: df235d21c7d0e884aa5bd2312c5346b0, type: 3}
       propertyPath: m_RootOrder
       value: 1
