@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 
 public class MainMenu : MonoBehaviour {
@@ -7,9 +8,15 @@ public class MainMenu : MonoBehaviour {
     public UnityEngine.UI.Button LevelSelectButton;
     public UnityEngine.UI.Button QuitButton;
 
-    void Start() {
-        if (!OtherStuff.PlayedTutorial)
-            transition.SwitchSceneTo("Tutorial");
+    private bool initted = false;
+
+    void Update() {
+        if (!initted) {
+            if (!OtherStuff.PlayedTutorial) {
+                transition.SwitchSceneTo("Tutorial");
+            }
+            initted = true;
+        }
     }
 
     public void OnStartButtonClick() {

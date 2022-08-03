@@ -8,7 +8,7 @@ public class Transition : MonoBehaviour {
     public float transition_time = 5.0f;
 
     [System.Obsolete]
-    void Start() {
+    public void Start() {
         gameObject.SetActiveRecursively(true);
         animators = new Animator[5];
         animators[0] = transform.Find("Top").GetComponent<Animator>();
@@ -17,6 +17,7 @@ public class Transition : MonoBehaviour {
         animators[3] = transform.Find("BotM").GetComponent<Animator>();
         animators[4] = transform.Find("Bot").GetComponent<Animator>();
         entry_unlocked_animator = transform.Find("Intermediate").Find("Mask").GetComponent<Animator>();
+        foreach (Animator a in animators) a.enabled = true;
 
         if (OtherStuff.WasEntryUnlockedForTransition) {
             entry_unlocked_animator.SetTrigger("Out");
@@ -25,7 +26,7 @@ public class Transition : MonoBehaviour {
     }
 
     public void SwitchSceneTo(string next) {
-        StartCoroutine(LoadLevel(next));
+        StartCoroutine("LoadLevel", next);
     }
 
     IEnumerator LoadLevel(string next) {

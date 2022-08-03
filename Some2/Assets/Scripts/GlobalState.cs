@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 
 public static class ApplicationLifetime {
@@ -7,6 +8,8 @@ public static class ApplicationLifetime {
         AlmanacProgress.latest_unlocked_note = PlayerPrefs.GetInt("AlmanacProgress_Note", -1);
         AlmanacProgress.latest_unlocked_syntax_note = PlayerPrefs.GetInt("AlmanacProgress_Syntax", -1);
         OtherStuff.PlayedTutorial = PlayerPrefs.GetInt("Tutorial_Played", 0) == 0 ? false : true;
+
+        File.WriteAllText("test.txt", "" + PlayerPrefs.GetInt("Tutorial_Played", 0));
     }
 }
 
