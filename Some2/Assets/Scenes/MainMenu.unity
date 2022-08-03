@@ -968,7 +968,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Almanac
+  m_text: Journal
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0979f15d9dff8b4c956a22fc25432ca, type: 2}
   m_sharedMaterial: {fileID: 7849261637610447934, guid: c0979f15d9dff8b4c956a22fc25432ca, type: 2}
