@@ -30,6 +30,11 @@ public class LevelTutorial : MonoBehaviour {
     public UnityEngine.UI.Image DialogueBox;
     public TMPro.TMP_Text DialogueBoxText;
     public TMPro.TMP_InputField TutorialBindingGraph;
+    public bool clicked;
+
+    public void RunButtonClick() {
+        clicked = true;
+    }
 
     void Start() {
         index = 0;
@@ -41,9 +46,10 @@ public class LevelTutorial : MonoBehaviour {
             new Stage(new Vector2(-255, 110.8f), new Vector2(170, 70), "Here's a graph that you cannot change"),
             new Stage(new Vector2(-255, 44.3f), new Vector2(170, 70), "Here's a graph that you can change"),
             new Stage(new Vector2(-255, 44.3f), new Vector2(170, 60), "Input \"x\" here and press enter"),
-            new Stage(new Vector2(0, 0), new Vector2(170, 60), "Click the play button",
+            new Stage(new Vector2(-255, -103.3f), new Vector2(170, 60), "Click the play button",
                     () => TutorialBindingGraph.text.Trim() == "x"),
-            new Stage(new Vector2(0, 0), new Vector2(170, 60), "And let the physics do the rest!"),
+            new Stage(new Vector2(0, 0), new Vector2(170, 60), "And let the physics do the rest!",
+                    () => clicked),
         };
         Stage s = TutorialDialogueStages[index];
         DialogueBox.rectTransform.anchoredPosition = new Vector3(s.position.x, s.position.y, DialogueBox.rectTransform.position.z);
