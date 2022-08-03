@@ -937,16 +937,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1248655564}
     - target: {fileID: 6800485959763427094, guid: 05d9648149d91f144a77219da36db160, type: 3}
-      propertyPath: m_Color.b
-      value: 0.24652767
+      propertyPath: m_FlipX
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427094, guid: 05d9648149d91f144a77219da36db160, type: 3}
-      propertyPath: m_Color.g
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427094, guid: 05d9648149d91f144a77219da36db160, type: 3}
+      propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427094, guid: 05d9648149d91f144a77219da36db160, type: 3}
-      propertyPath: m_Color.r
+      propertyPath: m_Color.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427094, guid: 05d9648149d91f144a77219da36db160, type: 3}
+      propertyPath: m_Color.g
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800485959763427094, guid: 05d9648149d91f144a77219da36db160, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427095, guid: 05d9648149d91f144a77219da36db160, type: 3}
       propertyPath: m_RootOrder
@@ -1262,6 +1274,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488047006}
     m_Modifications:
+    - target: {fileID: 7137373476951272399, guid: 6b2d412e738a121429da2dd72e4c8751, type: 3}
+      propertyPath: m_text
+      value: New Journal Entry Unlocked
+      objectReference: {fileID: 0}
     - target: {fileID: 7433094784382107864, guid: 6b2d412e738a121429da2dd72e4c8751, type: 3}
       propertyPath: m_Name
       value: TransitionObjects
