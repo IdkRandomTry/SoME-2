@@ -7,15 +7,16 @@ public class MainMenu : MonoBehaviour {
     public UnityEngine.UI.Button LevelSelectButton;
     public UnityEngine.UI.Button QuitButton;
 
+    void Start() {
+        if (!OtherStuff.PlayedTutorial)
+            transition.SwitchSceneTo("Tutorial");
+    }
+
     public void OnStartButtonClick() {
         StartButton.interactable = false;
-        if (OtherStuff.PlayedTutorial) {
-            if (Application.CanStreamedLevelBeLoaded(PlayerProgress.CurrentSceneName())) {
-                transition.SwitchSceneTo(PlayerProgress.CurrentSceneName());
-            } else transition.SwitchSceneTo("Level01");
-        } else {
-            transition.SwitchSceneTo("Tutorial");
-        }
+        if (Application.CanStreamedLevelBeLoaded(PlayerProgress.CurrentSceneName())) {
+            transition.SwitchSceneTo(PlayerProgress.CurrentSceneName());
+        } else transition.SwitchSceneTo("Level01");
     }
 
     public void OnAlmanacButtonClick() {

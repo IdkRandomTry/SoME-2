@@ -1016,6 +1016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialogueBox: {fileID: 1876613878}
   DialogueBoxText: {fileID: 1910274344}
+  TutorialBindingGraph: {fileID: 1823825627}
 --- !u!1 &1248655559
 GameObject:
   m_ObjectHideFlags: 0
