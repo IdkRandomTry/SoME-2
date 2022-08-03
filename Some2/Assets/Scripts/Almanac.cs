@@ -45,6 +45,6 @@ public class Almanac : MonoBehaviour {
     
     public void OnBackButtonClick() {
         BackButton.interactable = false;
-        transition.SwitchSceneTo("MainMenu");
+        transition.SwitchSceneTo(OtherStuff.AlmanacBackButton);
     }
 }

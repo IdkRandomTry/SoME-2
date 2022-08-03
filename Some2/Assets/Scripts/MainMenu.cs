@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour {
 
     public void OnAlmanacButtonClick() {
         AlmanacButton.interactable = false;
+        OtherStuff.AlmanacBackButton = "MainMenu";
         transition.SwitchSceneTo("Almanac");
     }
 

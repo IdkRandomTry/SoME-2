@@ -13,6 +13,7 @@ public static class ApplicationLifetime {
 public static class OtherStuff {
     public static bool WasEntryUnlockedForTransition = false;
     public static bool PlayedTutorial;
+    public static string AlmanacBackButton = "MainMenu";
 
     public static void UpdatePlayerPrefs() {
         PlayerPrefs.SetInt("Tutorial_Played", PlayedTutorial ? 1 : 0);
