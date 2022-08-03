@@ -4,8 +4,8 @@ public static class ApplicationLifetime {
     [RuntimeInitializeOnLoadMethod]
     public static void OnLoad() {
         PlayerProgress.latest_unlocked_level = PlayerPrefs.GetInt("LevelProgress", 1);
-        AlmanacProgress.latest_unlocked_note = PlayerPrefs.GetInt("AlmanacProgress_Note", 0);
-        AlmanacProgress.latest_unlocked_syntax_note = PlayerPrefs.GetInt("AlmanacProgress_Syntax", 0);
+        AlmanacProgress.latest_unlocked_note = PlayerPrefs.GetInt("AlmanacProgress_Note", -1);
+        AlmanacProgress.latest_unlocked_syntax_note = PlayerPrefs.GetInt("AlmanacProgress_Syntax", -1);
         OtherStuff.PlayedTutorial = PlayerPrefs.GetInt("Tutorial_Played", 0) == 0 ? false : true;
     }
 }
@@ -44,8 +44,8 @@ public static class PlayerProgress {
 }
 
 public static class AlmanacProgress {
-    public static int latest_unlocked_note = 0;
-    public static int latest_unlocked_syntax_note = 0;
+    public static int latest_unlocked_note = -1;
+    public static int latest_unlocked_syntax_note = -1;
 
     public static void UpdatePlayerPrefs() {
         Debug.Log("Call " + latest_unlocked_note + "  " + latest_unlocked_syntax_note);
@@ -58,6 +58,7 @@ public static class AlmanacProgress {
     }
 
     public static bool SyntaxIsUnlocked(int id) {
+        Debug.Log(id);
         return id <= latest_unlocked_syntax_note;
     }
 }

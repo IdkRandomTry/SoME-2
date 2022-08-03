@@ -28,7 +28,20 @@ public class Level : MonoBehaviour {
         if (IsTutorial) {
             OtherStuff.PlayedTutorial = true;
             OtherStuff.UpdatePlayerPrefs();
-            transition.SwitchSceneTo("Level01");
+
+            if (!AlmanacProgress.EntryIsUnlocked(UnlockedAlmanacEntry)) {
+                AlmanacProgress.latest_unlocked_note = UnlockedAlmanacEntry;
+                AlmanacProgress.UpdatePlayerPrefs();
+                OtherStuff.WasEntryUnlockedForTransition = true;
+            }
+            
+            if (!AlmanacProgress.SyntaxIsUnlocked(UnlockedAlmanacSyntaxEntry)) {
+                AlmanacProgress.latest_unlocked_syntax_note = UnlockedAlmanacSyntaxEntry;
+                AlmanacProgress.UpdatePlayerPrefs();
+                OtherStuff.WasEntryUnlockedForTransition = true;
+            }
+
+            transition.SwitchSceneTo("MainMenu");
             return;
         }
 
@@ -49,6 +62,7 @@ public class Level : MonoBehaviour {
             AlmanacProgress.UpdatePlayerPrefs();
             OtherStuff.WasEntryUnlockedForTransition = true;
         }
+        
         if (!AlmanacProgress.SyntaxIsUnlocked(UnlockedAlmanacSyntaxEntry)) {
             AlmanacProgress.latest_unlocked_syntax_note = UnlockedAlmanacSyntaxEntry;
             AlmanacProgress.UpdatePlayerPrefs();

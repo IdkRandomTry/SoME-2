@@ -770,7 +770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 951172970}
   TheNewContentImage: {fileID: 21300000, guid: c6ef4235ed5796a4da05204bb66f2ce8, type: 3}
-  ID: -1
+  ID: 0
   IsSyntaxPage: 1
 --- !u!114 &214726441
 MonoBehaviour:
@@ -3694,7 +3694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 951172970}
   TheNewContentImage: {fileID: 21300000, guid: cc87fd76e7d9b584baee7c6c6d8e0673, type: 3}
-  ID: -1
+  ID: 0
   IsSyntaxPage: 1
 --- !u!114 &991123083
 MonoBehaviour:
