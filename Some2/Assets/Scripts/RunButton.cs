@@ -4,6 +4,11 @@ public class RunButton : MonoBehaviour {
     public Circle[] balls;
     public Goal[] goals;
 
+    public Sprite PlaySprite;
+    public Sprite ResetSprite;
+
+    private UnityEngine.UI.Image TheImage;
+
     private Vector2[] m_ball_recorded_pos;
     private Quaternion[] m_ball_recorded_rot;
     private bool m_simulating = false;
@@ -19,6 +24,8 @@ public class RunButton : MonoBehaviour {
             m_ball_recorded_rot[i] = c.transform.rotation;
             i++;
         }
+        TheImage = GetComponent<UnityEngine.UI.Image>();
+        TheImage.sprite = PlaySprite;
     }
 
     void Update() {
@@ -29,6 +36,9 @@ public class RunButton : MonoBehaviour {
 
     public void OnClick() {
         m_simulating = !m_simulating;
+        
+        if (m_simulating) TheImage.sprite = ResetSprite;
+        else TheImage.sprite = PlaySprite;
         
         foreach (Circle c in balls) {
             c.my_rigidbody.simulated = !c.my_rigidbody.simulated;

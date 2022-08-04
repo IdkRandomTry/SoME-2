@@ -810,6 +810,8 @@ MonoBehaviour:
   - {fileID: 1248655564}
   goals:
   - {fileID: 848697206}
+  PlaySprite: {fileID: 21300000, guid: 397effcbef7c51549b94cff96d17783a, type: 3}
+  ResetSprite: {fileID: 21300000, guid: dc30cb87a52e4754688bf87ebc238438, type: 3}
 --- !u!114 &684122200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,14 +881,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6981132, g: 0.43796724, b: 0.43796724, a: 1}
+  m_Color: {r: 0.79607844, g: 0.89411765, b: 1, a: 0.7058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f79394abb87d84c4bb7ab8c035c68911, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 397effcbef7c51549b94cff96d17783a, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
