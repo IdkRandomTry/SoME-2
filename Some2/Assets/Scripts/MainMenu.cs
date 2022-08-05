@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour {
     void Update() {
         if (!initted) {
             if (!OtherStuff.PlayedTutorial) {
-                transition.SwitchSceneTo("Tutorial");
+                transition.SwitchSceneTo("Level00");
             }
             initted = true;
         }
