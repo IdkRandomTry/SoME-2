@@ -9,7 +9,7 @@ public class AlmanacEntry : MonoBehaviour {
     private BackgroundMusic m_background_music;
 
     void Start() {
-        m_background_music = GameObject.Find("AudioPlayer").GetComponent<BackgroundMusic>();
+        m_background_music = GameObject.Find("AudioPlayer")?.GetComponent<BackgroundMusic>();
         if (IsSyntaxPage) {
             if (AlmanacProgress.SyntaxIsUnlocked(ID)) {
                 transform.Find("Lock").gameObject.SetActive(false);
@@ -30,7 +30,7 @@ public class AlmanacEntry : MonoBehaviour {
     }
 
     public void OnClick() {
-        m_background_music.click_effect.Play();
+        m_background_music?.click_effect.Play();
         if (IsSyntaxPage) {
             if (AlmanacProgress.SyntaxIsUnlocked(ID)) {
                 content.Switch(TheNewContentImage);

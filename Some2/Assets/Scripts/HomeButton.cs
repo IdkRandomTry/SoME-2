@@ -7,12 +7,12 @@ public class HomeButton : MonoBehaviour {
     private BackgroundMusic m_background_music;
 
     void Start() {
-        m_background_music = GameObject.Find("AudioPlayer").GetComponent<BackgroundMusic>();
+        m_background_music = GameObject.Find("AudioPlayer")?.GetComponent<BackgroundMusic>();
     }
     
     public void OnClick() {
         TheButton.interactable = false;
-        m_background_music.click_effect_2.Play();
+        m_background_music?.click_effect_2.Play();
         transition.SwitchSceneTo("MainMenu");
     }
 }

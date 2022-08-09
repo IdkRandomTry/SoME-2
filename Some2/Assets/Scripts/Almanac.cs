@@ -20,7 +20,7 @@ public class Almanac : MonoBehaviour {
     private BackgroundMusic m_background_music;
 
     void Start() {
-        m_background_music = GameObject.Find("AudioPlayer").GetComponent<BackgroundMusic>();
+        m_background_music = GameObject.Find("AudioPlayer")?.GetComponent<BackgroundMusic>();
         m_currently_presenting_page = 0;
     }
 
@@ -44,7 +44,7 @@ public class Almanac : MonoBehaviour {
     
     public void OnBackButtonClick() {
         BackButton.interactable = false;
-        m_background_music.click_effect.Play();
+        m_background_music?.click_effect.Play();
         transition.SwitchSceneTo(OtherStuff.AlmanacBackButton);
     }
 }

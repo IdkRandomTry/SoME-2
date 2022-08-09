@@ -10,13 +10,13 @@ public class Settings : MonoBehaviour {
     private BackgroundMusic m_background_music;
 
     void Start() {
-        m_background_music = GameObject.Find("AudioPlayer").GetComponent<BackgroundMusic>();
+        m_background_music = GameObject.Find("AudioPlayer")?.GetComponent<BackgroundMusic>();
         MusicSlider.value = OtherStuff.MusicVolume;
         SoundSlider.value = OtherStuff.SoundVolume;
     }
 
     public void OnBackButtonClick() {
-        m_background_music.click_effect.Play();
+        m_background_music?.click_effect.Play();
         BackButton.interactable = false;
         transition.SwitchSceneTo("MainMenu");
     }
