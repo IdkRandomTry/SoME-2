@@ -1563,6 +1563,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488047006}
     m_Modifications:
+    - target: {fileID: 430901803307942251, guid: 925066c5d7c58404cbe33cb7c3aa0dd6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 650
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137373476951272399, guid: 925066c5d7c58404cbe33cb7c3aa0dd6, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a5796e6d3aac3fe44a53fb5a0e890908, type: 2}
+    - target: {fileID: 7137373476951272399, guid: 925066c5d7c58404cbe33cb7c3aa0dd6, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7433094784382107864, guid: 925066c5d7c58404cbe33cb7c3aa0dd6, type: 3}
       propertyPath: m_Name
       value: TransitionObjects
