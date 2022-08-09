@@ -1,4 +1,4 @@
-using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -117,7 +117,16 @@ public class Lexer {
                     
                     string substr = current_source.Substring(start_index, current_index - start_index);
                     type = TokenType.Number;
-                    value = float.Parse(substr);
+                    float.TryParse(substr, NumberStyles.Any, CultureInfo.InvariantCulture, out float v);
+                    value = v;
+                } else if (Current() == '.') {
+                    current_index++;
+                    while (char.IsDigit(Current()))
+                        current_index++;
+                    string substr = current_source.Substring(start_index + 1, current_index - start_index - 1);
+                    type = TokenType.Number;
+                    float.TryParse("0." + substr, NumberStyles.Any, CultureInfo.InvariantCulture, out float v);
+                    value = v;
                 } else if (char.IsLetter(Current())) {
                     current_index++;
                     while (char.IsLetterOrDigit(Current()))
@@ -192,23 +201,27 @@ public class Parser {
     }
 
     public ASTNode ParsePrefixExpr() {
+        ASTNode ret = null;
         switch (curr.Type) {
             case TokenType.Number:
                 Advance();
-                return new NumberASTNode(prev);
+                ret =  new NumberASTNode(prev);
+                break;
             
             case TokenType.Plus:
             case TokenType.Minus:
                 Advance();
                 Token op = prev;
                 ASTNode operand = ParsePrefixExpr();
-                return new UnaryASTNode(op, operand);
+                ret =  new UnaryASTNode(op, operand);
+                break;
             
             case TokenType.OpenParen:
                 Advance();
                 ASTNode inner = ParseExpression();
                 Match(TokenType.CloseParen);
-                return inner;
+                ret =  inner;
+                break;
 
             case TokenType.Ident:
                 Advance();
@@ -235,7 +248,8 @@ public class Parser {
                                 } else var_names.Add(((IdentASTNode)node).ident.Lexeme);
                             }
                             FunctionTable.user_defined_functions[name.Lexeme] = new CustomFunction(value, var_names.Count, var_names.ToArray());
-                            return new NumberASTNode(new Token(TokenType.Number, "0", 0)); // Is this good?
+                            ret =  new NumberASTNode(new Token(TokenType.Number, "0", 0)); // Is this good?
+                            break;
                         } else {
                             // Is an actual call here
                             if (!FunctionTable.user_defined_functions.ContainsKey(name.Lexeme)) {
@@ -244,30 +258,47 @@ public class Parser {
                                 Error("Wrong amount of arguments passed to the function" + name.Lexeme + ". Expected " +
                                     FunctionTable.user_defined_functions[name.Lexeme].arity + " got " + args.Count);
                             }
-                            return new CallASTNode(name, args.ToArray());
+                            ret =  new CallASTNode(name, args.ToArray());
+                            break;
                         }
                     } else if (FunctionTable.intrinsic_functions[name.Lexeme].arity != args.Count) {
                         Error("Wrong amount of arguments passed to the function" + name.Lexeme + ". Expected " +
                             FunctionTable.user_defined_functions[name.Lexeme].arity + " got " + args.Count);
                     }
-                    return new IntrinsicCallASTNode(name, args.ToArray());
+                    ret =  new IntrinsicCallASTNode(name, args.ToArray());
+                    break;
                 } else {
-                    return new IdentASTNode(name);
+                    ret =  new IdentASTNode(name);
+                    break;
                 }
             
             case TokenType.X:
                 Advance();
-                return new XASTNode(prev);
+                ret =  new XASTNode(prev);
+                break;
             
             case TokenType.E:
                 Advance();
-                return new EASTNode(prev);
+                ret =  new EASTNode(prev);
+                break;
                 
             case TokenType.PI:
                 Advance();
-                return new PIASTNode(prev);
+                ret =  new PIASTNode(prev);
+                break;
         }
-        Error("Unknown Expression starting with the token " + curr.Lexeme);
+
+        if (ret != null) {
+            if (curr.Type != TokenType.EOF && curr.Type != TokenType.Plus && curr.Type != TokenType.Minus && curr.Type != TokenType.Star
+                        && curr.Type != TokenType.Slash && curr.Type != TokenType.Carat && curr.Type != TokenType.CloseParen) {
+                ASTNode right = ParsePrefixExpr();
+                return new BinaryASTNode(ret, new Token(TokenType.Star, "*", null), right);
+            } else {
+                return ret;
+            }
+        }
+
+        Error("Unknown Expression starting with the token " + curr.Type.ToString());
         return null;
     }
 

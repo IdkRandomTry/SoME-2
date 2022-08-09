@@ -142,7 +142,8 @@ public class Graph : MonoBehaviour {
         for (float x = 0; x <= 1 + step; x += step * Time.deltaTime) {
             // Configurable Easing function here?
             // Cubic Ease In-Out from easings.net
-            t = (x < 0.5 ? 4 * x*x*x : 1 - ((-2 * x + 2)*(-2 * x + 2)*(-2 * x + 2)) / 2);
+            t = 1 - (1 - x) * (1 - x) * (1 - x) * (1 - x);
+            // t = (x < 0.5 ? 4 * x*x*x : 1 - ((-2 * x + 2)*(-2 * x + 2)*(-2 * x + 2)) / 2);
             yield return null;
         }
     }
