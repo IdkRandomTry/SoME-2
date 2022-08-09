@@ -196,11 +196,22 @@ public class Parser {
             case TokenType.Star: case TokenType.Slash: return Precedence.Factor;
             case TokenType.Carat: return Precedence.Power;
             case TokenType.OpenParen: return Precedence.Call;
+
+            case TokenType.Error:
+            case TokenType.EOF: return Precedence.Full;
         }
         return Precedence.None;
     }
 
-    public ASTNode ParsePrefixExpr() {
+    public ASTNode CaratTower(ASTNode left) {
+        if (curr.Type != TokenType.Carat) return left;
+
+        Advance();
+        ASTNode right = ParsePrefixExpr();
+        return CaratTower(new BinaryASTNode(left, new Token(TokenType.Carat, "^", null), right));
+    }
+
+    public ASTNode ParsePrefixExpr(bool nounary = false) {
         ASTNode ret = null;
         switch (curr.Type) {
             case TokenType.Number:
@@ -210,6 +221,7 @@ public class Parser {
             
             case TokenType.Plus:
             case TokenType.Minus:
+                if (nounary) break;
                 Advance();
                 Token op = prev;
                 ASTNode operand = ParsePrefixExpr();
@@ -289,41 +301,52 @@ public class Parser {
         }
 
         if (ret != null) {
-            if (curr.Type != TokenType.EOF && curr.Type != TokenType.Plus && curr.Type != TokenType.Minus && curr.Type != TokenType.Star
-                        && curr.Type != TokenType.Slash && curr.Type != TokenType.Carat && curr.Type != TokenType.CloseParen) {
-                return ParseInfixExpr(new Token(TokenType.Star, "*", null), Precedence.Factor + 1, ret);
+            if (curr.Type == TokenType.Number
+                || curr.Type == TokenType.OpenParen
+                || curr.Type == TokenType.Ident
+                || curr.Type == TokenType.X
+                || curr.Type == TokenType.E
+                || curr.Type == TokenType.PI) {
+                ASTNode right = ParsePrefixExpr(true);
+                right = CaratTower(right);
+                return new BinaryASTNode(ret, new Token(TokenType.Star, "*", null), right);
             } else {
                 return ret;
             }
         }
-
+        
         Error("Unknown Expression starting with the token " + curr.Type.ToString());
         return null;
     }
 
-    public ASTNode ParseInfixExpr(Token op, Precedence prec, ASTNode lhs) {
+    public ASTNode ParseInfixExpr(Token op, Precedence prec, ASTNode lhs, bool nounary = false) {
         switch (op.Type) {
             case TokenType.Plus:
             case TokenType.Minus:
             case TokenType.Star:
             case TokenType.Slash:
             case TokenType.Carat:
-                ASTNode rhs = ParseExpression(prec);
+                ASTNode rhs = ParseExpression(prec, nounary);
                 return new BinaryASTNode(lhs, op, rhs);
         }
         Error("Unknown Binary Expression for the token " + op);
         return null;
     }
 
-    public ASTNode ParseExpression(Precedence prec = Precedence.None) {
+    public ASTNode ParseExpression(Precedence prec = Precedence.None, bool nounary = false) {
         if (errored) return null;
-        ASTNode left = ParsePrefixExpr();
+        ASTNode left = ParsePrefixExpr(nounary);
         // @Error handling check node validity
         Precedence curr_prec = GetPrec(curr);
 
-        if (curr_prec == Precedence.None) return left;
+        if (curr_prec == Precedence.Full || curr_prec == Precedence.None) {
+            return left;
+        }
+
         Advance();
         Token op = prev;
+        Debug.Log(op);
+        Debug.Log("Got: " + GetPrec(op) + " Over: " + prec);
         while (true) {
             if (errored) return null;
             if (GetPrec(op) == Precedence.None) break;

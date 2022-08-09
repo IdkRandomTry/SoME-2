@@ -29,6 +29,10 @@ public class IdentASTNode : ASTNode {
     public IdentASTNode(Token ident) : base(ASTNodeType.Ident) {
         this.ident = ident;
     }
+    
+    public override string ToString() {
+        return "Ident AST Node " + ident.Lexeme;
+    }
 }
 
 public class CallASTNode : ASTNode {
