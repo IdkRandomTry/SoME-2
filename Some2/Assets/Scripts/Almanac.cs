@@ -17,12 +17,11 @@ public class Almanac : MonoBehaviour {
     // True if the currently presenting image is ImageTwo
     // False if the currently presenting image is ImageOne
     private bool m_currently_presenting_image;
+    private BackgroundMusic m_background_music;
 
     void Start() {
+        m_background_music = GameObject.Find("AudioPlayer").GetComponent<BackgroundMusic>();
         m_currently_presenting_page = 0;
-
-        ImageOneAnimator.SetTrigger("In");
-        ImageTwoAnimator.SetTrigger("Out");
     }
 
     public void Switch(Sprite sprite) {
@@ -45,6 +44,7 @@ public class Almanac : MonoBehaviour {
     
     public void OnBackButtonClick() {
         BackButton.interactable = false;
+        m_background_music.click_effect.Play();
         transition.SwitchSceneTo(OtherStuff.AlmanacBackButton);
     }
 }

@@ -13,7 +13,11 @@ public class RunButton : MonoBehaviour {
     private Quaternion[] m_ball_recorded_rot;
     private bool m_simulating = false;
 
+    private BackgroundMusic m_background_music;
+
     void Start() {
+        m_background_music = GameObject.Find("AudioPlayer").GetComponent<BackgroundMusic>();
+
         int i = 0;
         m_ball_recorded_pos = new Vector2[balls.Length];
         m_ball_recorded_rot = new Quaternion[balls.Length];
@@ -35,6 +39,7 @@ public class RunButton : MonoBehaviour {
     }
 
     public void OnClick() {
+        m_background_music.click_effect_2.Play();
         m_simulating = !m_simulating;
         
         if (m_simulating) TheImage.sprite = ResetSprite;

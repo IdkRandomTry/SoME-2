@@ -17,6 +17,10 @@ public static class OtherStuff {
     public static bool WasEntryUnlockedForTransition = false;
     public static bool PlayedTutorial;
     public static string AlmanacBackButton = "MainMenu";
+    public static bool MusicPlaying = false;
+
+    public static float MusicVolume = 0.65f;
+    public static float SoundVolume = 1.0f;
 
     public static void UpdatePlayerPrefs() {
         PlayerPrefs.SetInt("Tutorial_Played", PlayedTutorial ? 1 : 0);

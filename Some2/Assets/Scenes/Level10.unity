@@ -2038,6 +2038,22 @@ PrefabInstance:
       propertyPath: transition
       value: 
       objectReference: {fileID: 1424453251}
+    - target: {fileID: 3272204361240290454, guid: 8674a8d03a9241a4790f52e4a76abe0f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bbd5a4be8f236c14b8eb6a5813e782d0, type: 3}
+    - target: {fileID: 3272204361240290454, guid: 8674a8d03a9241a4790f52e4a76abe0f, type: 3}
+      propertyPath: m_Color.a
+      value: 0.7058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272204361240290454, guid: 8674a8d03a9241a4790f52e4a76abe0f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.89411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272204361240290454, guid: 8674a8d03a9241a4790f52e4a76abe0f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.79607844
+      objectReference: {fileID: 0}
     - target: {fileID: 6443272645110720323, guid: 8674a8d03a9241a4790f52e4a76abe0f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
