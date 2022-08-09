@@ -291,8 +291,7 @@ public class Parser {
         if (ret != null) {
             if (curr.Type != TokenType.EOF && curr.Type != TokenType.Plus && curr.Type != TokenType.Minus && curr.Type != TokenType.Star
                         && curr.Type != TokenType.Slash && curr.Type != TokenType.Carat && curr.Type != TokenType.CloseParen) {
-                ASTNode right = ParsePrefixExpr();
-                return new BinaryASTNode(ret, new Token(TokenType.Star, "*", null), right);
+                return ParseInfixExpr(new Token(TokenType.Star, "*", null), Precedence.Factor + 1, ret);
             } else {
                 return ret;
             }
