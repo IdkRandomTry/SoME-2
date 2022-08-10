@@ -1590,6 +1590,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488047006}
     m_Modifications:
+    - target: {fileID: 1675669740186588425, guid: 141d4e0eabf493a4786ec31eeb63b033, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.67018497
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675669740186588425, guid: 141d4e0eabf493a4786ec31eeb63b033, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.67018497
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675669740186588425, guid: 141d4e0eabf493a4786ec31eeb63b033, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.67018497
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675669740186588425, guid: 141d4e0eabf493a4786ec31eeb63b033, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 180.00002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675669740186588425, guid: 141d4e0eabf493a4786ec31eeb63b033, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -562.19
+      objectReference: {fileID: 0}
     - target: {fileID: 7433094784382107864, guid: 141d4e0eabf493a4786ec31eeb63b033, type: 3}
       propertyPath: m_Name
       value: TransitionObjects

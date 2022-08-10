@@ -1385,6 +1385,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1172104234708014324, guid: 4ee9a0d11a799d34ab689c2baf4279cc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.67018497
+      objectReference: {fileID: 0}
+    - target: {fileID: 1172104234708014324, guid: 4ee9a0d11a799d34ab689c2baf4279cc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.67018497
+      objectReference: {fileID: 0}
+    - target: {fileID: 1172104234708014324, guid: 4ee9a0d11a799d34ab689c2baf4279cc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.67018497
+      objectReference: {fileID: 0}
+    - target: {fileID: 1172104234708014324, guid: 4ee9a0d11a799d34ab689c2baf4279cc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 180.00002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1172104234708014324, guid: 4ee9a0d11a799d34ab689c2baf4279cc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -562.19
+      objectReference: {fileID: 0}
     - target: {fileID: 7137373476951272399, guid: 4ee9a0d11a799d34ab689c2baf4279cc, type: 3}
       propertyPath: m_text
       value: New Journal Entry Unlocked

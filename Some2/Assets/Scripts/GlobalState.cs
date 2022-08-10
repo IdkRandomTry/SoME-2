@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public static class ApplicationLifetime {
         AlmanacProgress.latest_unlocked_note = PlayerPrefs.GetInt("AlmanacProgress_Note", -1);
         AlmanacProgress.latest_unlocked_syntax_note = PlayerPrefs.GetInt("AlmanacProgress_Syntax", -1);
         OtherStuff.PlayedTutorial = PlayerPrefs.GetInt("Tutorial_Played", 0) == 0 ? false : true;
+        AlmanacSpriteRegistry.Load();
 
         File.WriteAllText("test.txt", "" + PlayerPrefs.GetInt("Tutorial_Played", 0));
     }
@@ -15,6 +17,7 @@ public static class ApplicationLifetime {
 
 public static class OtherStuff {
     public static bool WasEntryUnlockedForTransition = false;
+    public static int SyntaxEntryUnlocked = -1, NoteEntryUnlocked = -1;
     public static bool PlayedTutorial;
     public static string AlmanacBackButton = "MainMenu";
     public static bool MusicPlaying = false;
@@ -24,6 +27,34 @@ public static class OtherStuff {
 
     public static void UpdatePlayerPrefs() {
         PlayerPrefs.SetInt("Tutorial_Played", PlayedTutorial ? 1 : 0);
+    }
+}
+
+public static class AlmanacSpriteRegistry {
+    public static Dictionary<int, Sprite> NotesSprites;
+    public static Dictionary<int, Sprite> SyntaxNotesSprites;
+
+    public static void Load() {
+        if (NotesSprites == null) {
+            NotesSprites = new Dictionary<int, Sprite>();
+            NotesSprites[1] = Resources.Load<Sprite>("Almanac Entries/slope");
+            NotesSprites[2] = Resources.Load<Sprite>("Almanac Entries/shift of origin");
+            NotesSprites[3] = Resources.Load<Sprite>("Almanac Entries/X-scaling");
+            NotesSprites[4] = Resources.Load<Sprite>("Almanac Entries/Y-scaling");
+            NotesSprites[5] = Resources.Load<Sprite>("Almanac Entries/X-reflection");
+            NotesSprites[6] = Resources.Load<Sprite>("Almanac Entries/Y-reflection");
+            NotesSprites[7] = Resources.Load<Sprite>("Almanac Entries/mod(f(x))");
+            NotesSprites[8] = Resources.Load<Sprite>("Almanac Entries/f(mod(x))");
+        }
+        if (SyntaxNotesSprites == null) {
+            SyntaxNotesSprites = new Dictionary<int, Sprite>();
+            SyntaxNotesSprites[0] = Resources.Load<Sprite>("Almanac Entries/syntax");
+            SyntaxNotesSprites[2] = Resources.Load<Sprite>("Almanac Entries/trig help");
+            SyntaxNotesSprites[3] = Resources.Load<Sprite>("Almanac Entries/min help");
+            SyntaxNotesSprites[4] = Resources.Load<Sprite>("Almanac Entries/max help");
+            SyntaxNotesSprites[5] = Resources.Load<Sprite>("Almanac Entries/log help");
+            SyntaxNotesSprites[6] = Resources.Load<Sprite>("Almanac Entries/mod(x) e");
+        }
     }
 }
 
