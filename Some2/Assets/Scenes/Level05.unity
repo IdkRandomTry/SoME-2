@@ -2297,7 +2297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a36b4a21d7836847b706dc2dde07b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultText: x^2
+  DefaultText: 0.5x
 --- !u!1 &1248655559
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,7 +2704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Resolution: 0.1
-  SourceCode: x^2
+  SourceCode: 0.5x
   WidthOverride: 0.1
 --- !u!68 &1486280667
 EdgeCollider2D:
@@ -3511,7 +3511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Resolution: 0.1
-  SourceCode: x^2
+  SourceCode: 0.5x
   WidthOverride: 0.1
 --- !u!68 &1756596265
 EdgeCollider2D:
@@ -4261,7 +4261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a36b4a21d7836847b706dc2dde07b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultText: x^2
+  DefaultText: 0.5x
 --- !u!1 &2031537603
 GameObject:
   m_ObjectHideFlags: 0
