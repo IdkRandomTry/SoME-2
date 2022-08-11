@@ -35,8 +35,8 @@ public class Transition : MonoBehaviour {
         foreach (Animator a in animators) a.enabled = true;
 
         if (OtherStuff.WasEntryUnlockedForTransition) {
-            OtherStuff.NoteEntryUnlocked = -1;
-            OtherStuff.SyntaxEntryUnlocked = -1;
+            OtherStuff.NoteEntriesUnlocked.Clear();
+            OtherStuff.SyntaxEntriesUnlocked.Clear();
             OtherStuff.WasEntryUnlockedForTransition = false;
         }
     }
@@ -51,19 +51,31 @@ public class Transition : MonoBehaviour {
         foreach (Animator a in animators)
             a.SetTrigger("TransitionIn");
         yield return new WaitForSeconds(transition_time);
+
         if (OtherStuff.WasEntryUnlockedForTransition) {
-            if (OtherStuff.NoteEntryUnlocked != -1)
-                PresentableImage.sprite = AlmanacSpriteRegistry.NotesSprites[OtherStuff.NoteEntryUnlocked];
-            else
-                PresentableImage.sprite = AlmanacSpriteRegistry.SyntaxNotesSprites[OtherStuff.SyntaxEntryUnlocked];
-            
             PresentingTextAnimator.SetTrigger("In");
-            PresentingImageAnimator.SetTrigger("In");
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2));
-            PresentingImageAnimator.SetTrigger("Out");
+            foreach (int idx in OtherStuff.NoteEntriesUnlocked) {
+                foreach (Sprite s in AlmanacSpriteRegistry.NotesSprites[idx]) {
+                    PresentableImage.sprite = s;
+                    PresentingImageAnimator.SetTrigger("In");
+                    yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2));
+                    PresentingImageAnimator.SetTrigger("Out");
+                    yield return new WaitForSeconds(image_move_time);
+                }
+            }
+            foreach (int idx in OtherStuff.SyntaxEntriesUnlocked) {
+                foreach (Sprite s in AlmanacSpriteRegistry.SyntaxNotesSprites[idx]) {
+                    PresentableImage.sprite = s;
+                    PresentingImageAnimator.SetTrigger("In");
+                    yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2));
+                    PresentingImageAnimator.SetTrigger("Out");
+                    yield return new WaitForSeconds(image_move_time);
+                }
+            }
             PresentingTextAnimator.SetTrigger("Out");
             yield return new WaitForSeconds(image_move_time);
         }
+
         task.allowSceneActivation = true;
     }
 }

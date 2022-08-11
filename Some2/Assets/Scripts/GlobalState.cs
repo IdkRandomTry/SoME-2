@@ -17,7 +17,8 @@ public static class ApplicationLifetime {
 
 public static class OtherStuff {
     public static bool WasEntryUnlockedForTransition = false;
-    public static int SyntaxEntryUnlocked = -1, NoteEntryUnlocked = -1;
+    public static List<int> SyntaxEntriesUnlocked = new List<int>();
+    public static List<int> NoteEntriesUnlocked = new List<int>();
     public static bool PlayedTutorial;
     public static string AlmanacBackButton = "MainMenu";
     public static bool MusicPlaying = false;
@@ -31,29 +32,35 @@ public static class OtherStuff {
 }
 
 public static class AlmanacSpriteRegistry {
-    public static Dictionary<int, Sprite> NotesSprites;
-    public static Dictionary<int, Sprite> SyntaxNotesSprites;
+    public static Dictionary<int, Sprite[]> NotesSprites;
+    public static Dictionary<int, Sprite[]> SyntaxNotesSprites;
 
     public static void Load() {
         if (NotesSprites == null) {
-            NotesSprites = new Dictionary<int, Sprite>();
-            NotesSprites[1] = Resources.Load<Sprite>("Almanac Entries/slope");
-            NotesSprites[2] = Resources.Load<Sprite>("Almanac Entries/shift of origin");
-            NotesSprites[3] = Resources.Load<Sprite>("Almanac Entries/X-scaling");
-            NotesSprites[4] = Resources.Load<Sprite>("Almanac Entries/Y-scaling");
-            NotesSprites[5] = Resources.Load<Sprite>("Almanac Entries/X-reflection");
-            NotesSprites[6] = Resources.Load<Sprite>("Almanac Entries/Y-reflection");
-            NotesSprites[7] = Resources.Load<Sprite>("Almanac Entries/mod(f(x))");
-            NotesSprites[8] = Resources.Load<Sprite>("Almanac Entries/f(mod(x))");
+            NotesSprites = new Dictionary<int, Sprite[]>();
+            NotesSprites[1] = new Sprite[] { Resources.Load<Sprite>("Almanac Entries/slope") };
+            NotesSprites[2] = new Sprite[] { Resources.Load<Sprite>("Almanac Entries/shift of origin") };
+            NotesSprites[3] = new Sprite[] { Resources.Load<Sprite>("Almanac Entries/X-scaling") };
+            NotesSprites[4] = new Sprite[] { Resources.Load<Sprite>("Almanac Entries/Y-scaling") };
+            NotesSprites[5] = new Sprite[] { Resources.Load<Sprite>("Almanac Entries/X-reflection") };
+            NotesSprites[6] = new Sprite[] { Resources.Load<Sprite>("Almanac Entries/Y-reflection") };
+            NotesSprites[7] = new Sprite[] { Resources.Load<Sprite>("Almanac Entries/mod(f(x))") };
+            NotesSprites[8] = new Sprite[] { Resources.Load<Sprite>("Almanac Entries/f(mod(x))") };
         }
         if (SyntaxNotesSprites == null) {
-            SyntaxNotesSprites = new Dictionary<int, Sprite>();
-            SyntaxNotesSprites[0] = Resources.Load<Sprite>("Almanac Entries/syntax");
-            SyntaxNotesSprites[2] = Resources.Load<Sprite>("Almanac Entries/trig help");
-            SyntaxNotesSprites[3] = Resources.Load<Sprite>("Almanac Entries/min help");
-            SyntaxNotesSprites[4] = Resources.Load<Sprite>("Almanac Entries/max help");
-            SyntaxNotesSprites[5] = Resources.Load<Sprite>("Almanac Entries/log help");
-            SyntaxNotesSprites[6] = Resources.Load<Sprite>("Almanac Entries/mod(x) e");
+            SyntaxNotesSprites = new Dictionary<int, Sprite[]>();
+            SyntaxNotesSprites[0] = new Sprite[] {
+                Resources.Load<Sprite>("Almanac Entries/syntax"),
+                Resources.Load<Sprite>("Almanac Entries/rules")
+            };
+            SyntaxNotesSprites[2] = new Sprite[] {
+                Resources.Load<Sprite>("Almanac Entries/trig help"),
+                Resources.Load<Sprite>("Almanac Entries/const pi"),
+            };
+            SyntaxNotesSprites[3] = new Sprite[] { Resources.Load<Sprite>("Almanac Entries/min help") };
+            SyntaxNotesSprites[4] = new Sprite[] { Resources.Load<Sprite>("Almanac Entries/max help") };
+            SyntaxNotesSprites[5] = new Sprite[] { Resources.Load<Sprite>("Almanac Entries/log help") };
+            SyntaxNotesSprites[6] = new Sprite[] { Resources.Load<Sprite>("Almanac Entries/mod(x) help") };
         }
     }
 }

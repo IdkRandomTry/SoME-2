@@ -1506,6 +1506,10 @@ PrefabInstance:
       propertyPath: AllCircles.Array.data[1]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3392220204961499446, guid: 3712b3f1af585274482fe034d17c4f3f, type: 3}
+      propertyPath: UnlockedAlmanacSyntaxEntry
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3392220204961499447, guid: 3712b3f1af585274482fe034d17c4f3f, type: 3}
       propertyPath: m_RootOrder
       value: 7

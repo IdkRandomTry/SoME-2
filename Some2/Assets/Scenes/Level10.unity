@@ -1402,7 +1402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3392220204961499446, guid: df40f7465fce5024f9ba6d1a1d387482, type: 3}
       propertyPath: UnlockedAlmanacSyntaxEntry
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3392220204961499447, guid: df40f7465fce5024f9ba6d1a1d387482, type: 3}
       propertyPath: m_RootOrder

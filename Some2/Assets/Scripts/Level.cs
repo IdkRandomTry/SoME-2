@@ -32,17 +32,15 @@ public class Level : MonoBehaviour {
             if (!AlmanacProgress.EntryIsUnlocked(UnlockedAlmanacEntry)) {
                 AlmanacProgress.latest_unlocked_note = UnlockedAlmanacEntry;
                 AlmanacProgress.UpdatePlayerPrefs();
-                OtherStuff.NoteEntryUnlocked = UnlockedAlmanacEntry;
+                OtherStuff.NoteEntriesUnlocked.Add(UnlockedAlmanacEntry);
                 OtherStuff.WasEntryUnlockedForTransition = true;
             }
             
             if (!AlmanacProgress.SyntaxIsUnlocked(UnlockedAlmanacSyntaxEntry)) {
                 AlmanacProgress.latest_unlocked_syntax_note = UnlockedAlmanacSyntaxEntry;
                 AlmanacProgress.UpdatePlayerPrefs();
-                OtherStuff.SyntaxEntryUnlocked = UnlockedAlmanacSyntaxEntry;
+                OtherStuff.SyntaxEntriesUnlocked.Add(UnlockedAlmanacSyntaxEntry);
                 OtherStuff.WasEntryUnlockedForTransition = true;
-            Debug.Log(UnlockedAlmanacSyntaxEntry);
-            Debug.Log(AlmanacSpriteRegistry.SyntaxNotesSprites[UnlockedAlmanacSyntaxEntry]);
             }
 
             transition.SwitchSceneTo("MainMenu");
@@ -65,13 +63,13 @@ public class Level : MonoBehaviour {
             AlmanacProgress.latest_unlocked_note = UnlockedAlmanacEntry;
             AlmanacProgress.UpdatePlayerPrefs();
             OtherStuff.WasEntryUnlockedForTransition = true;
-            OtherStuff.NoteEntryUnlocked = UnlockedAlmanacEntry;
+            OtherStuff.NoteEntriesUnlocked.Add(UnlockedAlmanacEntry);
         }
         
         if (!AlmanacProgress.SyntaxIsUnlocked(UnlockedAlmanacSyntaxEntry)) {
             AlmanacProgress.latest_unlocked_syntax_note = UnlockedAlmanacSyntaxEntry;
             AlmanacProgress.UpdatePlayerPrefs();
-            OtherStuff.SyntaxEntryUnlocked = UnlockedAlmanacSyntaxEntry;
+            OtherStuff.SyntaxEntriesUnlocked.Add(UnlockedAlmanacSyntaxEntry);
             OtherStuff.WasEntryUnlockedForTransition = true;
         }
 
