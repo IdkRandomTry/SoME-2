@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.33333334, g: 0.43529412, b: 0.40392157, a: 0.78431374}
+  m_Color: {r: 0, g: 0.47058824, b: 0.78431374, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -128,14 +128,15 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2034627652097612278}
+  - {fileID: 8276952500092360493}
   - {fileID: 2034627652807580970}
   m_Father: {fileID: 2034627652143431406}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -83.73, y: -72.6}
-  m_SizeDelta: {x: 170, y: 98.15}
+  m_AnchoredPosition: {x: -83.73, y: -80.19}
+  m_SizeDelta: {x: 170, y: 113.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2034627651073762613
 CanvasRenderer:
@@ -158,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.33365968, g: 0.4339623, b: 0.40228778, a: 0.78431374}
+  m_Color: {r: 0.09620862, g: 0.3023215, b: 0.4339623, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -241,7 +242,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Are you sure you want a hint?
+  m_text: 'Are you sure you want a hint?
+
+    (click again to reveal hint)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a5796e6d3aac3fe44a53fb5a0e890908, type: 2}
   m_sharedMaterial: {fileID: -4476217172880376833, guid: a5796e6d3aac3fe44a53fb5a0e890908, type: 2}
@@ -468,7 +471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2034627652807580970}
   m_Layer: 5
-  m_Name: arrow bob
+  m_Name: ArrowBob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -488,10 +491,46 @@ RectTransform:
   m_Children:
   - {fileID: 2034627651007049695}
   m_Father: {fileID: 2034627651073762611}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 48.7, y: 72.7}
+  m_AnchoredPosition: {x: 48.7, y: 79.3}
   m_SizeDelta: {x: 30, y: 33.34}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &4837273144187719210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8276952500092360493}
+  m_Layer: 5
+  m_Name: HintArrows
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8276952500092360493
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837273144187719210}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2034627651073762611}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
