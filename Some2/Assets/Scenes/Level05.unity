@@ -1382,7 +1382,7 @@ PrefabInstance:
       objectReference: {fileID: 1887155716}
     - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
       propertyPath: SolutionTexts.Array.data[0]
-      value: 0.15x-1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
       propertyPath: SolutionTexts.Array.data[1]
@@ -1957,7 +1957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427095, guid: df235d21c7d0e884aa5bd2312c5346b0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.92
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6800485959763427095, guid: df235d21c7d0e884aa5bd2312c5346b0, type: 3}
       propertyPath: m_LocalPosition.z

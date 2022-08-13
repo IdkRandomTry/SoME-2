@@ -249,6 +249,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1488047006}
     m_Modifications:
     - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: HintText
+      value: Check out 'mod' from Journal Syntax
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
       propertyPath: InputFields.Array.size
       value: 1
       objectReference: {fileID: 0}

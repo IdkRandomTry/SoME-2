@@ -1866,7 +1866,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
       propertyPath: HintText
-      value: Try to get pink graph out of the way reducing this parameter.
+      value: Get the pink graph out of the way by reducing this parameter.
       objectReference: {fileID: 0}
     - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
       propertyPath: InputFields.Array.size

@@ -1938,7 +1938,7 @@ PrefabInstance:
       objectReference: {fileID: 1284349259}
     - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
       propertyPath: SolutionTexts.Array.data[0]
-      value: pi
+      value: 3.14
       objectReference: {fileID: 0}
     - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
       propertyPath: SolutionTexts.Array.data[1]
