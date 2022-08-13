@@ -765,6 +765,78 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488047006}
     m_Modifications:
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: InputFields.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: SolutionTexts.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: FunctionInputs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: InputFields.Array.data[0]
+      value: 
+      objectReference: {fileID: 1284349259}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: InputFields.Array.data[1]
+      value: 
+      objectReference: {fileID: 138989833}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: InputFields.Array.data[2]
+      value: 
+      objectReference: {fileID: 1309222597}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: InputFields.Array.data[3]
+      value: 
+      objectReference: {fileID: 1410431571}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: InputFields.Array.data[4]
+      value: 
+      objectReference: {fileID: 391840098}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: InputFields.Array.data[5]
+      value: 
+      objectReference: {fileID: 691560440}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: SolutionTexts.Array.data[0]
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: SolutionTexts.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: SolutionTexts.Array.data[2]
+      value: -0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: SolutionTexts.Array.data[3]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: SolutionTexts.Array.data[4]
+      value: -0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: SolutionTexts.Array.data[5]
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: FunctionInputs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1607781819}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: FunctionInputs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1430032912}
+    - target: {fileID: 2034627652143431394, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
+      propertyPath: FunctionInputs.Array.data[2]
+      value: 
+      objectReference: {fileID: 803339474}
     - target: {fileID: 2034627652143431405, guid: 9632cf72a24f7d349bbfe12047f8f690, type: 3}
       propertyPath: m_Name
       value: HintButton
