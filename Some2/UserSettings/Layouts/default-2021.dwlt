@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 1157
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 98
+  controlID: 67
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 86
+  controlID: 68
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 87
+  controlID: 69
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -308,7 +308,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 40430
+  m_LastSelectedObjectID: 29378
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -405,22 +405,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\apps\sidunity\SoME-2\Some2
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 2}
-    m_SelectedIDs: 746f0000
-    m_LastClickedID: 28532
-    m_ExpandedIDs: 00000000726f0000746f0000766f000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 182}
+    m_SelectedIDs: 98700000
+    m_LastClickedID: 28824
+    m_ExpandedIDs: 0000000054700000567000005870000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -448,7 +448,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000726f0000746f0000766f0000
+    m_ExpandedIDs: 00000000547000005670000058700000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -500,7 +500,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 10}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
@@ -539,7 +539,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 588
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -576,9 +576,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ca3dfeff
-      m_LastClickedID: -115254
-      m_ExpandedIDs: 2a3efeff9c61feff6263feffc864feff6c6dfeffd86efeff467afeff607afeffb480feff3a9efeff06affeff10affeff70affeffa8b3feff0eb5feffb2bffeffd2bffeffdcbffeff54c0fefffac8feff28cafeff88cbfeffe8ccfeff48cefeff5acffeffbad3feff1ed5feff94d6fefff8d7feff5cd9feff08e5feff18e5feff22e5feff2ce5feff6ef9feff7ef9feff88f9feff8af9feff0e0cfffff60dffff1211ffff1c11ffff2611ffff2428ffff2e28ffff3028ffff9029ffff5c2bffff402dffffa02effffc62fffff9632ffff6036fffffc3cfffffe3effffea40ffffe042ffff3c52ffff4652ffffea56fffffa56ffff0457ffff1057ffff685affff725affff745affff9c73ffffac73ffffb673ffffc073ffffa67affff027cffffca81ffff808fffff908fffff9a8fffff9c8fffffca92ffff4094ffff9895fffff496ffff4c98ffffa899ffff029bffff5c9cffffa0a0ffff18a2ffff72a3fffff0a4ffffbaa6ffff6ea8ffffeaa9ffff4aabffffaaacffff06aeffff60afffffb8b0ffff0eb2ffff66b3ffffb8b4ffff22b8ffff2cb8ffff36b8ffff68b9fffff6baffff2ed5ffff3ed5ffff48d5ffff5cd5ffffe8e5fffff8e5ffff02e6ffff04e6ffffdaf6ffffd0f8ffff2efbfffff47000005e720000e09800004e9d00008c9d000002ad0000d4ae00003eb00000acba000016bc000030ca00007cd2000048de000002e400004ee50000b0e60000b6ef0000dcf0000098f10000d6f20000ccf500003af80000dcfd0000f4fe0000a400010004070100a2080100fa1f01002024010068240100b43801008e3f0100184b01009c560100185a0100d86001008266010076670100c2770100
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 6af7ffff8ef8ffff2efbffffb8720000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

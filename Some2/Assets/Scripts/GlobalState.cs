@@ -50,8 +50,8 @@ public static class AlmanacSpriteRegistry {
         if (SyntaxNotesSprites == null) {
             SyntaxNotesSprites = new Dictionary<int, Sprite[]>();
             SyntaxNotesSprites[0] = new Sprite[] {
-                Resources.Load<Sprite>("Almanac Entries/syntax"),
-                Resources.Load<Sprite>("Almanac Entries/rules")
+                Resources.Load<Sprite>("Almanac Entries/rules"),
+                Resources.Load<Sprite>("Almanac Entries/syntax")
             };
             SyntaxNotesSprites[2] = new Sprite[] {
                 Resources.Load<Sprite>("Almanac Entries/trig help"),
